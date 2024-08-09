@@ -1,0 +1,4 @@
+.idea
+venv
+/src/app/app.log
+/src/bot/bot.log

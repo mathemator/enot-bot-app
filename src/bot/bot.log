@@ -1,0 +1,187 @@
+2024-08-07 08:04:52,592 - INFO - Starting bot
+2024-08-07 08:55:22,503 - INFO - Starting bot
+2024-08-07 08:55:35,124 - INFO - Starting bot
+2024-08-07 08:58:14,256 - INFO - Starting bot
+2024-08-07 09:36:46,714 - INFO - Starting bot
+2024-08-07 09:46:45,362 - INFO - Starting bot
+2024-08-07 11:46:03,655 - INFO - Starting bot
+2024-08-07 11:46:17,723 - INFO - response for -1002088136062: <Response [500]>
+2024-08-07 11:47:28,751 - INFO - Starting bot
+2024-08-07 11:47:54,829 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"database is locked"}
+
+2024-08-07 11:48:23,242 - INFO - response for -1002088136062: {"error":"Value Error","message":"Could not find the input entity for PeerUser(user_id=100500) (PeerUser). Please read https://docs.telethon.dev/en/stable/concepts/entities.html to find out more details."}
+
+2024-08-08 04:10:54,679 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+2024-08-08 04:10:54,682 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+
+2024-08-08 04:50:18,168 - INFO - Starting bot
+2024-08-08 05:04:54,976 - INFO - Starting bot
+2024-08-08 05:09:48,676 - INFO - response for -1002088136062: {"message":"Participants saved to participants--1002088136062.json","status":"success"}
+
+2024-08-08 05:13:33,978 - INFO - response for -1002088136062: {"message":"Participants saved to None","status":"success"}
+
+2024-08-08 05:48:25,712 - INFO - Starting bot
+2024-08-08 05:49:46,545 - INFO - Starting bot
+2024-08-08 05:49:53,265 - INFO - response for -1002088136062: {"message":"Participants saved to None","status":"success"}
+
+2024-08-08 05:53:07,500 - INFO - Starting bot
+2024-08-08 05:53:22,313 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 05:54:46,538 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 05:55:17,276 - INFO - Starting bot
+2024-08-08 05:55:27,908 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 05:58:48,423 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:01:59,552 - INFO - Starting bot
+2024-08-08 06:02:15,106 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:06:27,634 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:07:17,159 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:08:20,255 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:08:38,286 - INFO - Starting bot
+2024-08-08 06:08:48,510 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 06:10:03,398 - INFO - Starting bot
+2024-08-08 06:11:05,566 - INFO - Starting bot
+2024-08-08 06:12:26,439 - INFO - Starting bot
+2024-08-08 06:18:01,124 - INFO - Starting bot
+2024-08-08 06:31:49,023 - INFO - Starting bot
+2024-08-08 06:33:12,478 - INFO - Starting bot
+2024-08-08 06:36:39,534 - INFO - Starting bot
+2024-08-08 06:38:15,498 - INFO - Starting bot
+2024-08-08 06:50:45,146 - INFO - Starting bot
+2024-08-08 06:50:45,602 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-08 06:50:45,603 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-08-08 07:23:48,402 - INFO - Starting bot
+2024-08-08 07:23:48,730 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-08 07:23:48,731 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-08-08 07:24:05,787 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:25:16,648 - INFO - Starting bot
+2024-08-08 07:25:21,441 - INFO - Starting bot
+2024-08-08 07:25:35,800 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:26:03,596 - INFO - Starting bot
+2024-08-08 07:26:11,974 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:28:32,310 - INFO - Starting bot
+2024-08-08 07:29:25,542 - INFO - Starting bot
+2024-08-08 07:30:06,905 - INFO - response for -1002103659934: {"error":"Internal Server Error","message":"database is locked"}
+
+2024-08-08 07:32:56,814 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"database is locked"}
+
+2024-08-08 07:33:06,202 - INFO - Starting bot
+2024-08-08 07:33:24,809 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:34:28,222 - INFO - Starting bot
+2024-08-08 07:34:52,741 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:35:06,153 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"database is locked"}
+
+2024-08-08 07:36:17,196 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:42:07,752 - INFO - Starting bot
+2024-08-08 07:42:25,383 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:42:35,228 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:47:27,916 - INFO - Starting bot
+2024-08-08 07:47:45,449 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:47:56,661 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:48:13,223 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:48:57,060 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:49:26,922 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 07:49:36,875 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 08:15:45,024 - INFO - Starting bot
+2024-08-08 08:15:55,021 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 08:16:01,231 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-08 08:16:27,524 - INFO - response for -1002103659934: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 02:47:23,265 - INFO - Starting bot
+2024-08-09 02:49:46,988 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 02:51:46,650 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 02:51:58,908 - INFO - response for -1002103659934: {"message":"Participants saved to database","status":"success"}
+
