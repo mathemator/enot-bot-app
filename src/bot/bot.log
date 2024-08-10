@@ -185,3 +185,195 @@ telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsucc
 
 2024-08-09 02:51:58,908 - INFO - response for -1002103659934: {"message":"Participants saved to database","status":"success"}
 
+2024-08-09 04:03:34,758 - INFO - Starting bot
+2024-08-09 04:06:30,947 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"'User' object has no attribute 'first_named'"}
+
+2024-08-09 04:06:54,806 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 04:10:48,861 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+2024-08-09 04:10:48,861 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+
+2024-08-09 04:14:20,716 - INFO - Starting bot
+2024-08-09 04:14:48,308 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: invalid user_id specified
+2024-08-09 04:14:48,309 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1216, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 150, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 8715, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\src\bot\bot.py", line 109, in handle_text_message
+    chat_member = bot.get_chat_member(message.chat.id, mentioned_user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1635, in get_chat_member
+    apihelper.get_chat_member(self.token, chat_id, user_id)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 410, in get_chat_member
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: invalid user_id specified
+
+2024-08-09 04:18:57,919 - INFO - Starting bot
+2024-08-09 04:19:01,855 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: invalid user_id specified
+2024-08-09 04:19:01,855 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1216, in __threaded_polling
+    self.worker_pool.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 150, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 8715, in _run_middlewares_and_handler
+    result = handler['function'](message)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\src\bot\bot.py", line 110, in handle_text_message
+    chat_member = bot.get_chat_member(message.chat.id, mentioned_user_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1635, in get_chat_member
+    apihelper.get_chat_member(self.token, chat_id, user_id)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 410, in get_chat_member
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: invalid user_id specified
+
+2024-08-09 05:02:23,856 - INFO - Starting bot
+2024-08-09 05:02:49,544 - INFO - Starting bot
+2024-08-09 05:14:22,202 - INFO - Starting bot
+2024-08-09 05:14:37,352 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 05:18:00,442 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[Team(teams)]'. Original exception was: Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 05:18:11,307 - INFO - Starting bot
+2024-08-09 05:18:21,318 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 05:20:56,372 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 05:57:04,092 - INFO - Starting bot
+2024-08-09 05:57:30,044 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Error creating backref 'participants' on relationship 'ParticipantGroup.group': property of that name exists on mapper 'Mapper[Group(groups)]'"}
+
+2024-08-09 05:59:29,869 - INFO - Starting bot
+2024-08-09 06:00:42,162 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Mapper 'Mapper[Participant(participants)]' has no property 'group_associations'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called."}
+
+2024-08-09 06:01:40,461 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:02:51,645 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:03:41,078 - INFO - Starting bot
+2024-08-09 06:03:52,353 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:04:48,641 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:18:24,639 - INFO - Starting bot
+2024-08-09 06:18:31,567 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 06:18:40,245 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 06:20:30,353 - INFO - Starting bot
+2024-08-09 06:21:46,308 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:24:01,090 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:30:33,394 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.team_participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:31:07,195 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.team_participants - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table."}
+
+2024-08-09 06:31:32,622 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"Could not determine join condition between parent/child tables on relationship Team.team_participants - there are no foreign keys linking these tables.  Ensure that referencing columns are associated with a ForeignKey or ForeignKeyConstraint, or specify a 'primaryjoin' expression."}
+
+2024-08-09 06:33:22,014 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 06:51:51,477 - INFO - Starting bot
+2024-08-09 06:52:07,100 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 07:03:29,424 - INFO - Starting bot
+2024-08-09 07:07:50,751 - INFO - Starting bot
+2024-08-09 07:09:40,115 - INFO - Starting bot
+2024-08-09 07:14:10,299 - INFO - Starting bot
+2024-08-09 07:21:23,590 - INFO - Starting bot
+2024-08-09 07:22:05,391 - INFO - Starting bot
+2024-08-09 07:22:41,643 - INFO - Starting bot
+2024-08-09 07:41:36,291 - INFO - Starting bot
+2024-08-09 07:42:35,456 - INFO - Starting bot
+2024-08-09 08:21:27,877 - INFO - Starting bot
+2024-08-09 08:24:38,374 - INFO - Starting bot
+2024-08-09 08:39:19,336 - INFO - Starting bot
+2024-08-09 08:40:14,574 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-08-09 08:42:34,335 - ERROR - Error occurred: handle_team_set() takes 1 positional argument but 2 were given
+2024-08-09 08:43:41,239 - ERROR - Error occurred: handle_team_set() takes 1 positional argument but 2 were given
+2024-08-09 08:45:20,372 - INFO - Starting bot
+2024-08-09 08:50:19,712 - INFO - response for -1002103659934: {"message":"Participants saved to database","status":"success"}
+
+2024-08-10 04:10:53,193 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+2024-08-10 04:10:53,195 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 502. Description: Bad Gateway
+
+2024-08-10 06:26:21,762 - INFO - Starting bot
+2024-08-10 06:36:07,530 - INFO - Starting bot
+2024-08-10 06:36:14,510 - INFO - Starting bot
+2024-08-10 06:36:37,529 - ERROR - Error occurred: 'str' object has no attribute 'name'
+2024-08-10 06:37:21,496 - INFO - Starting bot
+2024-08-10 06:37:25,969 - ERROR - Error occurred: 'str' object has no attribute 'team_name'
+2024-08-10 06:37:58,764 - INFO - Starting bot
+2024-08-10 06:38:22,255 - INFO - Starting bot
+2024-08-10 06:38:45,577 - INFO - Starting bot
+2024-08-10 06:39:17,552 - INFO - Starting bot
+2024-08-10 06:40:28,315 - INFO - Starting bot
+2024-08-10 06:44:22,305 - INFO - Starting bot
+2024-08-10 13:20:14,131 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+

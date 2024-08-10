@@ -2,7 +2,7 @@
 
 from flask import Blueprint, jsonify
 from telegram_service import TelegramService
-from common.participant_service import save_participants
+from common.repository import save_participants
 
 blueprint = Blueprint('api', __name__)
 

@@ -1,10 +1,11 @@
 import logging
 
 import telebot
-from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 import requests
+
+from participant_service import handle_all_command
+from team_service import handle_team, handle_teams, handle_team_delete, handle_team_set, handle_team_mention
 from bot_config import config_dict
-from common.participant_service import get_participants_by_group
 
 from logging_config import setup_logging
 
@@ -14,15 +15,31 @@ bot_token = config_dict['bot_token']
 
 bot = telebot.TeleBot(bot_token)
 
+current_chat_id = None
+
+# Пример общего обработчика ошибок
+def handle_error(error):
+    logging.error(f"Error occurred: {error}")
+    # Отправляем сообщение администратору или в группу
+    # Если ошибка произошла в обработчике сообщения, можно получить chat_id из глобальных переменных или других механизмов
+    if current_chat_id:
+        bot.send_message(current_chat_id, text=f"Непредвиденная ошибка: {error}, обратитесь к @mathemator")
+
 @bot.message_handler(commands=['update'])
 def refresh_participants(message):
-    chat_id = message.chat.id
-    response = requests.post(f'http://localhost:5000/update_participants/{chat_id}')
-    logging.info(f'response for {chat_id}: {response.text}')
-    if response.status_code == 200:
-        bot.reply_to(message, 'Обновил на своём компютере список коллег в чате!')
-    else:
-        bot.reply_to(message, 'Упс, что-то пошло не так на моём компьютере. Не получилось обновить список коллег.')
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        chat_id = message.chat.id
+        response = requests.post(f'http://localhost:5000/update_participants/{chat_id}')
+        logging.info(f'response for {chat_id}: {response.text}')
+        if response.status_code == 200:
+            bot.reply_to(message, 'Обновил на своём компютере список коллег в чате!')
+        else:
+            bot.reply_to(message, 'Упс, что-то пошло не так на моём компьютере. Не получилось обновить список коллег.')
+    except Exception as e:
+        handle_error(e)
+
 
 # Обработчик команды /start
 @bot.message_handler(commands=['start'])
@@ -40,64 +57,69 @@ def help(message):
                  """
 /start  -   моё приветствие
 /help   -   что я умею
-/all    -   отвечу на твоё сообщение, позвав при этом всех коллег в чате
-/refresh    -   вызываю мою систему для обновления списка коллег для чата
+/all <текст>   -   упомяну всех коллег для данного текста
+/update вызываю мою систему для обновления списка коллег для чата
+/team_set <имя команды> <список упоминаний участников> - установить команду. 
+Обратите внимание, что работать будут именно упоминания
+/team <имя команды> <текст> -   упомяну коллег из данной команды с данным текстом.\n\
+также есть короткая запись: @<имя команды>, но — обращаю внимание — только если сообщение с этого начинается
+/teams  -   список всех команд
+/team_delete <имя команды> - удаляю команду как отдельный список
                 """)
 
 @bot.message_handler(commands=['all'])
-def send_all_users(message):
-    group_id = message.chat.id
+def all(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_all_command(message, bot)
+    except Exception as e:
+        handle_error(e)
 
-    # Проверка прав бота
-    bot_member = bot.get_chat_member(group_id, bot.get_me().id)
-    if not (bot_member.can_delete_messages):
-        # Отправка сообщения с инструкциями
-        bot.send_message(chat_id=group_id, text="У меня нет нужных прав для выполнения этой команды. "
-                                                "Пожалуйста, предоставьте права администратора на удаление сообщений.")
-        return
+@bot.message_handler(commands=['team_set'])
+def team_set(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_team_set(message, bot)
+    except Exception as e:
+        handle_error(e)
 
-    participants = get_participants_by_group(group_id)
+@bot.message_handler(func=lambda message: message.text.startswith('@'))
+def handle_mention(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_team_mention(message, bot)
+    except Exception as e:
+        handle_error(e)
 
-    if not participants:
-        bot.send_message(
-            chat_id=message.chat.id,
-            text='Ой, похоже, у меня ещё нет данных об участниках. Попробуйте команду на обновление.',
-            message_thread_id=message.message_thread_id if message.is_topic_message else None
-        )
+@bot.message_handler(commands=['team'])
+def team(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_team(message, bot)
+    except Exception as e:
+        handle_error(e)
 
-    # Получение ID бота
-    bot_id = bot.get_me().id
+@bot.message_handler(commands=['teams'])
+def teams(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_teams(message, bot)
+    except Exception as e:
+        handle_error(e)
 
-    # Создание строки с упоминаниями
-    mentions = ', '.join(
-        f"[{participant.first_name or ''} {participant.last_name or ''}](tg://user?id={participant.id})"
-        for participant in participants
-        if participant.id != bot_id
-    )
-
-    # Получение текста сообщения без команды
-    message_text = message.text.split(maxsplit=1)
-    if len(message_text) > 1:
-        message_text = message_text[1]
-    else:
-        message_text = ""
-
-    # Создание нового текста сообщения
-    author_name = f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-
-    # Создание нового текста сообщения
-    full_message = f"{author_name} написал:\n{message_text}\n{mentions}"
-
-    # Отправка нового сообщения с разметкой MarkdownV2
-    bot.send_message(
-        chat_id=message.chat.id,
-        text=full_message,
-        parse_mode='MarkdownV2',
-        message_thread_id=message.message_thread_id if message.is_topic_message else None
-    )
-
-    # Удаление только исходного сообщения
-    bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+@bot.message_handler(commands=['team_delete'])
+def team_delete(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_team_delete(message, bot)
+    except Exception as e:
+        handle_error(e)
 
 if __name__ == '__main__':
     logging.info('Starting bot')
