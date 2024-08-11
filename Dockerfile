@@ -18,6 +18,8 @@ COPY data /app/data
 # Устанавливаем пакет
 RUN pip install --no-cache-dir .
 
+ENV DATABASE_PATH=/app/data/database.db
+
 # Устанавливаем переменную окружения для корректного вывода в консоли
 ENV PYTHONUNBUFFERED=1
 
