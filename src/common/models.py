@@ -4,17 +4,6 @@ from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
-
-class Group(Base):
-    __tablename__ = "groups"
-
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String, nullable=False)
-
-    # Связь с участниками через таблицу ParticipantGroup
-    participant_associations = relationship("ParticipantGroup", back_populates="group")
-
-
 class Participant(Base):
     __tablename__ = "participants"
 

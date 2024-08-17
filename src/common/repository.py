@@ -15,7 +15,6 @@ DATA_DIR = os.path.dirname(DATABASE_PATH)
 
 # Создание директории, если она не существует
 os.makedirs(DATA_DIR, exist_ok=True)
-print(f"govno {DATA_DIR}")
 
 # URL базы данных SQLite
 DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
@@ -34,17 +33,33 @@ Base.metadata.create_all(bind=engine)
 def save_participants(participants, group_id):
     db = SessionLocal()
     try:
+        # Получаем текущий список участников в группе
+        current_participants = (
+            db.query(ParticipantGroup)
+            .filter_by(group_id=group_id)
+            .all()
+        )
+
+        # Получаем список ID участников, которые остались в группе
+        participants_ids = {user.id for user in participants}
+
+        # Удаляем участников, которых больше нет в группе
+        for current_participant in current_participants:
+            if current_participant.participant_id not in participants_ids:
+                # Удаляем связь участника с группой
+                db.delete(current_participant)
+
+                # Также удаляем связь участника с командой, если это требуется
+                db.query(TeamParticipant).filter_by(participant_id=current_participant.participant_id).delete()
+
         for user in participants:
-            # Проверяем, существует ли уже участник с таким id
             existing_participant = db.query(Participant).filter_by(id=user.id).first()
 
             if existing_participant:
-                # Если участник существует, обновляем его данные
                 existing_participant.username = user.username
                 existing_participant.first_name = user.first_name
                 existing_participant.last_name = user.last_name
             else:
-                # Если участник не существует, создаем нового участника
                 participant = Participant(
                     id=user.id,
                     username=user.username,
@@ -53,7 +68,6 @@ def save_participants(participants, group_id):
                 )
                 db.add(participant)
 
-            # Теперь сохраняем связь участника с группой через ParticipantGroup
             existing_participant_group = (
                 db.query(ParticipantGroup)
                 .filter_by(participant_id=user.id, group_id=group_id)
@@ -198,3 +212,19 @@ def delete_team(chat_id, team_name):
         print(f"Unexpected error: {e}")
     finally:
         db.close()
+
+# прозапас
+def delete_participant_if_unlinked(db, participant_id):
+    """
+    Удаляет участника из базы данных, если он больше не привязан ни к одной группе или команде.
+
+    :param db: Текущая сессия базы данных.
+    :param participant_id: ID участника, которого нужно проверить.
+    """
+    related_group_count = db.query(ParticipantGroup).filter_by(participant_id=participant_id).count()
+    related_team_count = db.query(TeamParticipant).filter_by(participant_id=participant_id).count()
+
+    if related_group_count == 0 and related_team_count == 0:
+        participant_to_delete = db.query(Participant).filter_by(id=participant_id).first()
+        if participant_to_delete:
+            db.delete(participant_to_delete)

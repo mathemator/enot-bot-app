@@ -19,6 +19,10 @@ COPY data /app/data
 RUN pip install --no-cache-dir .
 
 ENV DATABASE_PATH=/app/data/database.db
+ENV DATABASE_URL=sqlite://${DATABASE_PATH}
+ENV API_ID=
+ENV API_HASH=
+ENV BOT_TOKEN=
 
 # Устанавливаем переменную окружения для корректного вывода в консоли
 ENV PYTHONUNBUFFERED=1
