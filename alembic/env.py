@@ -1,7 +1,6 @@
 from logging.config import fileConfig
-
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+import os
+from sqlalchemy import engine_from_config, pool
 
 from alembic import context
 from common.models import Base
@@ -12,8 +11,13 @@ config = context.config
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+fileConfig(config.config_file_name)
+
+# Here, we extract the DATABASE_URL environment variable
+database_url = os.getenv('DATABASE_URL')
+print(f"database_url: {database_url}" )
+if database_url:
+    config.set_main_option('sqlalchemy.url', database_url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
