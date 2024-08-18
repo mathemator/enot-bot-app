@@ -1,6 +1,5 @@
 # participant_service.py
 from telebot.formatting import escape_markdown
-
 from utils import (
     check_bot_permissions,
     create_mentions_text,

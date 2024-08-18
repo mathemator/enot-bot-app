@@ -1,6 +1,6 @@
 import logging
 
-from app_config import API_ID, API_HASH, BOT_TOKEN
+from app_config import API_HASH, API_ID, BOT_TOKEN
 from telethon import TelegramClient
 
 

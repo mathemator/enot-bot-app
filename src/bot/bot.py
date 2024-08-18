@@ -3,7 +3,7 @@ import time
 
 import requests
 import telebot
-from bot_config import BOT_TOKEN, APP_PORT
+from bot_config import APP_PORT, BOT_TOKEN
 from logging_config import setup_logging
 from participant_service import handle_all_command
 from team_service import (
@@ -159,7 +159,9 @@ def team_delete(message):
 
 def handle_update(message, silent):
     chat_id = message.chat.id
-    response = requests.post(f"http://localhost:{APP_PORT}/update_participants/{chat_id}")
+    response = requests.post(
+        f"http://localhost:{APP_PORT}/update_participants/{chat_id}"
+    )
     logging.info(f"response for {chat_id}: {response.text}")
     if silent:
         return

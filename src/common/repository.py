@@ -35,9 +35,7 @@ def save_participants(participants, group_id):
     try:
         # Получаем текущий список участников в группе
         current_participants = (
-            db.query(ParticipantGroup)
-            .filter_by(group_id=group_id)
-            .all()
+            db.query(ParticipantGroup).filter_by(group_id=group_id).all()
         )
 
         # Получаем список ID участников, которые остались в группе
@@ -50,7 +48,9 @@ def save_participants(participants, group_id):
                 db.delete(current_participant)
 
                 # Также удаляем связь участника с командой, если это требуется
-                db.query(TeamParticipant).filter_by(participant_id=current_participant.participant_id).delete()
+                db.query(TeamParticipant).filter_by(
+                    participant_id=current_participant.participant_id
+                ).delete()
 
         for user in participants:
             existing_participant = db.query(Participant).filter_by(id=user.id).first()
@@ -213,6 +213,7 @@ def delete_team(chat_id, team_name):
     finally:
         db.close()
 
+
 # прозапас
 def delete_participant_if_unlinked(db, participant_id):
     """
@@ -221,10 +222,16 @@ def delete_participant_if_unlinked(db, participant_id):
     :param db: Текущая сессия базы данных.
     :param participant_id: ID участника, которого нужно проверить.
     """
-    related_group_count = db.query(ParticipantGroup).filter_by(participant_id=participant_id).count()
-    related_team_count = db.query(TeamParticipant).filter_by(participant_id=participant_id).count()
+    related_group_count = (
+        db.query(ParticipantGroup).filter_by(participant_id=participant_id).count()
+    )
+    related_team_count = (
+        db.query(TeamParticipant).filter_by(participant_id=participant_id).count()
+    )
 
     if related_group_count == 0 and related_team_count == 0:
-        participant_to_delete = db.query(Participant).filter_by(id=participant_id).first()
+        participant_to_delete = (
+            db.query(Participant).filter_by(id=participant_id).first()
+        )
         if participant_to_delete:
             db.delete(participant_to_delete)

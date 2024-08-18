@@ -1,9 +1,11 @@
-import os
-import json
 import argparse
+import json
+import os
+
 
 class ConfigurationError(Exception):
     pass
+
 
 def load_file_config(config_file_path):
     if not os.path.exists(config_file_path):
@@ -13,6 +15,7 @@ def load_file_config(config_file_path):
         config = json.load(config_file)
 
     return config
+
 
 def load_config(config_file_path, required_params):
     # Загрузка конфигурации из файла
