@@ -60,7 +60,7 @@ class TeamParticipant(Base):
     group_id = Column(Integer, nullable=False)
     participant_id = Column(Integer, ForeignKey("participants.id", name='fk_team_participants_participant_id'), nullable=False)
 
-    __table_args__ = (PrimaryKeyConstraint("team_name", "group_id", name='team_participants'),)
+    __table_args__ = (PrimaryKeyConstraint("team_name", "group_id", "participant_id", name='team_participants'),)
 
     # Связь с участником
     participant = relationship("Participant", back_populates="team_associations")

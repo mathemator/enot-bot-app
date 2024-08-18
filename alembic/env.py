@@ -15,6 +15,7 @@ fileConfig(config.config_file_name)
 
 # Here, we extract the DATABASE_URL environment variable
 database_url = os.getenv('DATABASE_URL')
+print(f"database_url: {database_url}" )
 if database_url:
     config.set_main_option('sqlalchemy.url', database_url)
 

@@ -13646,3 +13646,6 @@ telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsucc
 2024-08-15 19:06:02,198 - ERROR - Error occurred: 'Participant' object has no attribute 'first_nameor'
 2024-08-15 19:06:20,448 - INFO - Starting bot
 2024-08-15 19:06:43,606 - INFO - Starting bot
+2024-08-18 10:54:59,812 - INFO - Starting bot
+2024-08-18 10:55:37,988 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
