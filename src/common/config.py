@@ -15,19 +15,12 @@ def load_file_config(config_file_path):
     return config
 
 def load_config(config_file_path, required_params):
-    # Парсинг аргументов командной строки
-    parser = argparse.ArgumentParser()
-    for param in required_params:
-        parser.add_argument(f'--{param}', type=str, help=f'{param} value')
-
-    args = parser.parse_args()
-
     # Загрузка конфигурации из файла
     config_dict = load_file_config(config_file_path)
 
-    # Попытка взять параметры из командной строки, если они есть
+    # Попытка взять параметры из переменных среды, если они есть
     for param in required_params:
-        config_dict[param] = getattr(args, param) or config_dict.get(param)
+        config_dict[param] = os.getenv(param.upper()) or config_dict.get(param)
 
     # Проверка наличия всех обязательных параметров
     for param in required_params:

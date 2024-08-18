@@ -45,13 +45,11 @@ class ParticipantGroup(Base):
     __tablename__ = "participant_groups"
 
     participant_id = Column(Integer, ForeignKey("participants.id"), nullable=False)
-    group_id = Column(Integer, ForeignKey("groups.id"), nullable=False)
+    group_id = Column(Integer, nullable=False)
 
     __table_args__ = (PrimaryKeyConstraint("participant_id", "group_id"),)
 
     participant = relationship("Participant", back_populates="group_associations")
-    group = relationship("Group", back_populates="participant_associations")
-
 
 class TeamParticipant(Base):
     __tablename__ = "team_participants"
