@@ -44,10 +44,12 @@ class Participant(Base):
 class ParticipantGroup(Base):
     __tablename__ = "participant_groups"
 
-    participant_id = Column(Integer, ForeignKey("participants.id"), nullable=False)
+    participant_id = Column(Integer, ForeignKey("participants.id", name='fk_participant_groups_participant_id'), nullable=False)
     group_id = Column(Integer, nullable=False)
 
-    __table_args__ = (PrimaryKeyConstraint("participant_id", "group_id"),)
+    __table_args__ = (
+        PrimaryKeyConstraint("participant_id", "group_id", name='pk_participant_groups'),
+    )
 
     participant = relationship("Participant", back_populates="group_associations")
 
@@ -56,9 +58,9 @@ class TeamParticipant(Base):
 
     team_name = Column(String, nullable=False)
     group_id = Column(Integer, nullable=False)
-    participant_id = Column(Integer, ForeignKey("participants.id"), nullable=False)
+    participant_id = Column(Integer, ForeignKey("participants.id", name='fk_team_participants_participant_id'), nullable=False)
 
-    __table_args__ = (PrimaryKeyConstraint("team_name", "group_id", "participant_id"),)
+    __table_args__ = (PrimaryKeyConstraint("team_name", "group_id", name='team_participants'),)
 
     # Связь с участником
     participant = relationship("Participant", back_populates="team_associations")
