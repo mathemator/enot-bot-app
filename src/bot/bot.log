@@ -13649,3 +13649,40 @@ telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsucc
 2024-08-18 10:54:59,812 - INFO - Starting bot
 2024-08-18 10:55:37,988 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
 
+2024-08-25 14:58:00,149 - INFO - Starting bot
+2024-08-25 14:59:49,741 - INFO - Starting bot
+2024-08-25 15:00:41,936 - INFO - Starting bot
+2024-08-25 15:11:59,073 - INFO - Starting bot
+2024-08-25 15:31:45,513 - INFO - Starting bot
+2024-08-25 15:33:43,368 - INFO - Starting bot
+2024-08-25 15:33:43,681 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-08-25 15:33:43,682 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-08-25 15:33:52,834 - INFO - Starting bot
+2024-08-25 15:34:31,309 - INFO - Starting bot
+2024-08-25 15:41:46,654 - INFO - Starting bot
+2024-08-25 15:44:30,569 - INFO - Starting bot
+2024-08-25 15:46:11,385 - INFO - Starting bot
+2024-08-25 15:47:15,795 - INFO - Starting bot

@@ -147,6 +147,7 @@ def get_teams_by_group(group_id):
     db = SessionLocal()
     try:
         # Извлечение всех уникальных команд для указанной группы
+        print(db.query(TeamParticipant.team_name).all())
         teams = (
             db.query(TeamParticipant.team_name)
             .filter_by(group_id=group_id)
