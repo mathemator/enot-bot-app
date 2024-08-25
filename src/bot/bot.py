@@ -7,7 +7,6 @@ from bot_config import APP_PORT, BOT_TOKEN
 from logging_config import setup_logging
 from participant_service import handle_all_command
 from team_service import (
-    handle_team,
     handle_team_delete,
     handle_team_mention,
     handle_team_set,
@@ -79,6 +78,7 @@ def help(message):
     bot.reply_to(
         message,
         """
+Привет! Меня зовут Шустрик, я енот-программист. Вот что я умею:
 /start  -   моё приветствие
 /help   -   что я умею
 /all <текст>   -    упомяну всех коллег для данного текста.\n\
@@ -86,8 +86,8 @@ def help(message):
 /update вызываю мою систему для обновления списка коллег для чата
 /team_set <имя команды> <список упоминаний участников> - установить команду. 
 Обратите внимание, что работать будут именно упоминания
-/team <имя команды> <текст> -   упомяну коллег из данной команды с данным текстом.\n\
-также есть короткая запись: @<имя команды> <текст>, но — обращаю внимание — только если сообщение с этого начинается
+@team1 ... @teamN <текст> -   упомяну коллег из перечисленных команд данным текстом.\n\
+обращаю внимание — только если сообщение с этого начинается и команды разделены пробелом
 /teams  -   список всех команд
 /team_delete <имя команды> - удаляю команду как отдельный список
                 """,
@@ -123,16 +123,6 @@ def team_set(message):
     current_chat_id = message.chat.id
     try:
         handle_team_set(message, bot)
-    except Exception as e:
-        handle_error(e)
-
-
-@bot.message_handler(commands=["team"])
-def team(message):
-    global current_chat_id
-    current_chat_id = message.chat.id
-    try:
-        handle_team(message, bot)
     except Exception as e:
         handle_error(e)
 

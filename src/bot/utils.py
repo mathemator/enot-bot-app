@@ -2,16 +2,16 @@
 from telebot.formatting import escape_markdown
 
 
-def check_bot_permissions(group_id, bot):
+def check_bot_delete_permissions(group_id, bot):
     bot_member = bot.get_chat_member(group_id, bot.get_me().id)
     return bot_member.can_delete_messages
 
-
+# Метод не используется, но сохранён на всякий случай
 def send_permission_error_message(group_id, bot):
     bot.send_message(
         chat_id=group_id,
         text="У меня нет нужных прав для выполнения этой команды. "
-        "Пожалуйста, предоставьте права администратора на удаление сообщений.",
+        "Пожалуйста, предоставьте нужные права администратора",
     )
 
 

@@ -1,10 +1,9 @@
 # team_service.py
-from telebot.formatting import escape_markdown
+import re
 from utils import (
-    check_bot_permissions,
+    check_bot_delete_permissions,
     create_mentions_text,
-    send_data_not_found_message,
-    send_permission_error_message,
+    send_data_not_found_message
 )
 
 from common.repository import (
@@ -25,6 +24,15 @@ def handle_team_set(message, bot):
 
     team_name = command_parts[1]
 
+    # Получаем список участников в чате
+    participants = get_participants_by_group(message.chat.id)
+
+    # Проверяем, существует ли участник с таким именем, как имя команды
+    for participant in participants:
+        if participant.username and participant.username.lower() == team_name.lower():
+            bot.reply_to(message, f"Ошибка: имя '{team_name}' уже занято участником {participant.username}.")
+            return
+
     usernames = []
     user_ids = []
 
@@ -32,8 +40,8 @@ def handle_team_set(message, bot):
         for entity in message.entities:
             if entity.type == "mention":
                 username = message.text[
-                    entity.offset + 1 : entity.offset + entity.length
-                ]
+                           entity.offset + 1 : entity.offset + entity.length
+                           ]
                 usernames.append(username)
             elif entity.type == "text_mention":
                 user_id = entity.user.id
@@ -50,90 +58,95 @@ def handle_team_set(message, bot):
     except Exception as e:
         bot.reply_to(message, f"Произошла ошибка при сохранении команды: {e}")
 
-
 def handle_team_mention(message, bot):
-    # Извлечение команды из сообщения
-    command_or_username = message.text.split()[0][1:]  # Убираем символ '@'
+    group_id = message.chat.id
 
-    print(command_or_username)
-    # Проверяем, есть ли участник с таким username в чате
+    # Регулярное выражение для поиска MarkdownV2 упоминаний
+    markdown_mention_pattern = re.compile(r'\[(.*?)\]\(tg://user\?id=(\d+)\)')
+
+    # Разбиваем сообщение на части
+    parts = message.text.split()
+
+    # Списки для хранения упомянутых команд, пользователей и текста
+    teams_or_usernames = []
+    user_mentions = []
+    user_ids = []
+    text_parts = []
+
     participants = get_participants_by_group(message.chat.id)
-    for participant in participants:
-        if (
-            participant.username
-            and participant.username.lower() == command_or_username.lower()
-        ):
-            # Если такой участник найден, бот ничего не делает
-            return
 
-    # Проверка, существует ли команда с таким именем
+    # Определяем команды, пользователей и текст
+    for part in parts:
+        if part.startswith('@'):
+            # Если часть начинается с @, это команда или пользователь
+            username_or_team = part[1:]
+            if any(
+                    participant.username and participant.username.lower() == username_or_team.lower()
+                    for participant in participants
+            ):
+                user_mentions.append(username_or_team)
+            else:
+                teams_or_usernames.append(username_or_team)
+        else:
+            # Ищем упоминания пользователей в формате MarkdownV2
+            markdown_mentions = markdown_mention_pattern.findall(part)
+            if markdown_mentions:
+                for mention in markdown_mentions:
+                    user_id = int(mention[1])
+                    user_ids.append(user_id)
+            else:
+                # Обычный текст
+                text_parts.append(part)
+
+    # Получаем все команды группы
     teams = get_teams_by_group(message.chat.id)
-    print(teams)
-    print(command_or_username in teams)
-    if command_or_username in teams:
-        message.text = f"/team {command_or_username} {message.text[len(command_or_username) + 2:]}"  # Формируем команду как /team название
-        handle_team(message, bot)  # Вызываем обработчик команды /team
+    valid_teams = [team for team in teams_or_usernames if team in teams]
+
+    # Получаем участников всех команд
+    all_team_member_ids = set()
+    for team_name in valid_teams:
+        team_member_ids = get_existing_team_members(team_name, message.chat.id)
+        all_team_member_ids.update(team_member_ids)
+
+    # Формируем список участников для упоминания
+    mentioned_participants = [
+        p for p in participants
+        if p.id in all_team_member_ids or p.username in user_mentions or p.id in user_ids
+    ]
+
+    # Убираем из упоминаний автора сообщения
+    mentioned_participants = [p for p in mentioned_participants if p.id != message.from_user.id]
+
+    if mentioned_participants:
+        bot_id = bot.get_me().id
+        author_name = (
+            f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
+        )
+        message_text = " ".join(text_parts).strip()
+        full_message = create_mentions_text(
+            mentioned_participants, bot_id, message_text, author_name
+        )
+
+        bot.send_message(
+            chat_id=message.chat.id,
+            text=full_message,
+            parse_mode="MarkdownV2",
+            message_thread_id=(
+                message.message_thread_id if message.is_topic_message else None
+            ),
+        )
+
+        if check_bot_delete_permissions(group_id, bot):
+            bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
     else:
         bot.reply_to(
             message,
-            f"Команда или участник с именем '{command_or_username}' не найдены.",
+            "Не удалось найти участников упомянутых команд или пользователей.",
         )
-
-
-def handle_team(message, bot):
-    group_id = message.chat.id
-
-    if not check_bot_permissions(group_id, bot):
-        send_permission_error_message(group_id, bot)
-        return
-
-    parts = message.text.split(maxsplit=1)
-    if len(parts) < 2:
-        send_data_not_found_message(
-            message, "Пожалуйста, укажите название команды и текст сообщения.", bot
-        )
-        return
-
-    team_name = parts[1].split(maxsplit=1)[0]
-    message_text = parts[1][len(team_name) :].strip()
-    team_member_ids = get_existing_team_members(team_name, group_id)
-    participants = [
-        p for p in get_participants_by_group(group_id) if p.id in team_member_ids
-    ]
-
-    if not participants:
-        send_data_not_found_message(
-            message,
-            f'Ой, похоже, у меня нет данных об участниках команды "{team_name}".',
-            bot,
-        )
-        return
-
-    bot_id = bot.get_me().id
-    author_name = (
-        f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-    )
-    message_text = message_text
-    full_message = create_mentions_text(participants, bot_id, message_text, author_name)
-
-    bot.send_message(
-        chat_id=message.chat.id,
-        text=full_message,
-        parse_mode="MarkdownV2",
-        message_thread_id=(
-            message.message_thread_id if message.is_topic_message else None
-        ),
-    )
-
-    bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
 
 
 def handle_teams(message, bot):
     group_id = message.chat.id
-
-    if not check_bot_permissions(group_id, bot):
-        send_permission_error_message(group_id, bot)
-        return
 
     teams = get_teams_by_group(group_id)
 
