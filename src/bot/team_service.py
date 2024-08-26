@@ -60,56 +60,30 @@ def handle_team_set(message, bot):
 def handle_team_mention(message, bot):
     group_id = message.chat.id
 
-    # Списки для хранения упомянутых команд, пользователей и текста
+    # Списки для хранения упомянутых команд и текста
     teams_or_usernames = []
-    user_mentions = []
-    user_ids = []
     text_parts = []
 
     message_text = message.text  # Исходный текст сообщения
 
-    # Получаем участников в чате
-    participants = get_participants_by_group(message.chat.id)
-
-    # Обрабатываем entities для поиска упоминаний пользователей и удаления их из текста
-    if message.entities:
-        offset_correction = 0
-        for entity in message.entities:
-            if entity.type == "mention":
-                # Упоминание через @username
-                username = message.text[entity.offset + 1 : entity.offset + entity.length]
-                user_mentions.append(username)
-                # Удаляем упоминание из текста
-                start = entity.offset - offset_correction
-                end = start + entity.length
-                message_text = message_text[:start] + message_text[end:]
-                offset_correction += entity.length
-            elif entity.type == "text_mention":
-                # Упоминание через MarkdownV2 [username](tg://user?id=...)
-                user_id = entity.user.id
-                user_ids.append(user_id)
-                # Удаляем упоминание из текста
-                start = entity.offset - offset_correction
-                end = start + entity.length
-                message_text = message_text[:start] + message_text[end:]
-                offset_correction += entity.length
-
     # Обрабатываем текст, чтобы выделить команды и текст сообщения
     parts = message_text.split()
+    group_teams = get_teams_by_group(message.chat.id)
     for part in parts:
         if part.startswith('@'):
             username_or_team = part[1:]
-            if username_or_team not in user_mentions:
+            # Проверяем, является ли это упоминанием команды
+            if username_or_team in group_teams:
                 teams_or_usernames.append(username_or_team)
-            # Удаляем упоминание из текста
-            start = message_text.find(part)
-            end = start + len(part)
-            message_text = message_text[:start] + message_text[end:]
+                # Удаляем упоминание команды из текста
+                start = message_text.find(part)
+                end = start + len(part)
+                message_text = message_text[:start] + message_text[end:]
         else:
             text_parts.append(part)
 
     # Получаем команды, которые существуют
-    teams = get_teams_by_group(message.chat.id)
+    teams = group_teams
     valid_teams = [team for team in teams_or_usernames if team in teams]
 
     # Получаем участников всех команд
@@ -118,10 +92,12 @@ def handle_team_mention(message, bot):
         team_member_ids = get_existing_team_members(team_name, message.chat.id)
         all_team_member_ids.update(team_member_ids)
 
+    # Получаем участников в чате
+    participants = get_participants_by_group(message.chat.id)
+
     # Формируем список участников для упоминания
     mentioned_participants = [
-        p for p in participants
-        if p.id in all_team_member_ids or p.username in user_mentions or p.id in user_ids
+        p for p in participants if p.id in all_team_member_ids
     ]
 
     # Убираем из упоминаний автора сообщения
@@ -132,7 +108,7 @@ def handle_team_mention(message, bot):
         author_name = (
             f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
         )
-        # Формируем текст сообщения, исключая упоминания
+        # Формируем текст сообщения, исключая упоминания команд
         message_text = " ".join(text_parts).strip()
         full_message = create_mentions_text(
             mentioned_participants, bot_id, message_text, author_name
@@ -152,8 +128,9 @@ def handle_team_mention(message, bot):
     else:
         bot.reply_to(
             message,
-            "Не удалось найти участников упомянутых команд или пользователей.",
+            "Не удалось найти участников упомянутых команд.",
         )
+
 
 def handle_teams(message, bot):
     group_id = message.chat.id
