@@ -3,7 +3,7 @@ import time
 
 import requests
 import telebot
-from bot_config import APP_PORT, BOT_TOKEN
+from bot_config import APP_PORT, BOT_TOKEN, DEVELOPER_ID
 from logging_config import setup_logging
 from participant_service import handle_all_command
 from team_service import (
@@ -28,8 +28,8 @@ def handle_error(error):
     if current_chat_id:
         try:
             bot.send_message(
-                current_chat_id,
-                text=f"Непредвиденная ошибка: {error}, обратитесь к @mathemator",
+                DEVELOPER_ID,
+                text=f"Непредвиденная ошибка: {error}",
             )
         except Exception as e:
             logging.error(f"Error while sending error message {e}")

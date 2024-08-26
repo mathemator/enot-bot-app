@@ -79,6 +79,8 @@ def handle_team_mention(message, bot):
                 start = message_text.find(part)
                 end = start + len(part)
                 message_text = message_text[:start] + message_text[end:]
+            else:
+                text_parts.append(part)
         else:
             text_parts.append(part)
 
@@ -103,7 +105,7 @@ def handle_team_mention(message, bot):
     # Убираем из упоминаний автора сообщения
     mentioned_participants = [p for p in mentioned_participants if p.id != message.from_user.id]
 
-    if mentioned_participants:
+    if mentioned_participants and teams_or_usernames:
         bot_id = bot.get_me().id
         author_name = (
             f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
@@ -125,12 +127,6 @@ def handle_team_mention(message, bot):
 
         if check_bot_delete_permissions(group_id, bot):
             bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
-    else:
-        bot.reply_to(
-            message,
-            "Не удалось найти участников упомянутых команд.",
-        )
-
 
 def handle_teams(message, bot):
     group_id = message.chat.id
