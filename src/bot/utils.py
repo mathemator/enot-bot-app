@@ -15,11 +15,10 @@ def send_permission_error_message(group_id, bot):
     )
 
 
-def create_mentions_text(participants, bot_id, message_text, author_name):
+def create_mentions_text(participants, message_text, author_name):
     mentions = ", ".join(
         f"[{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
         for participant in participants
-        if participant.id != bot_id
     )
     return f"{escape_markdown(author_name)} написал:\n{escape_markdown(message_text or '')}\n{mentions}"
 

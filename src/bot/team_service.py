@@ -63,12 +63,29 @@ def handle_team_mention(message, bot):
     # Списки для хранения упомянутых команд и текста
     teams_or_usernames = []
     text_parts = []
+    mentioned_participants = []  # Для хранения всех участников, которые будут упомянуты
 
     message_text = message.text  # Исходный текст сообщения
 
+    # Получаем команды, которые существуют в группе
+    group_teams = get_teams_by_group(group_id)
+
+    # Получаем участников в чате
+    participants = get_participants_by_group(group_id)
+
+    # Обрабатываем entities для поиска упоминаний без @
+    if message.entities:
+        for entity in message.entities:
+            if entity.type == "text_mention":
+                # Упоминание через MarkdownV2 [username](tg://user?id=...)
+                user_id = entity.user.id
+                username = entity.user.username
+                participant = next((p for p in participants if p.id == user_id), None)
+                if participant:
+                    mentioned_participants.append(participant)
+
     # Обрабатываем текст, чтобы выделить команды и текст сообщения
     parts = message_text.split()
-    group_teams = get_teams_by_group(message.chat.id)
     for part in parts:
         if part.startswith('@'):
             username_or_team = part[1:]
@@ -89,31 +106,30 @@ def handle_team_mention(message, bot):
     valid_teams = [team for team in teams_or_usernames if team in teams]
 
     # Получаем участников всех команд
-    all_team_member_ids = set()
+    all_teams_member_ids = set()
     for team_name in valid_teams:
         team_member_ids = get_existing_team_members(team_name, message.chat.id)
-        all_team_member_ids.update(team_member_ids)
+        all_teams_member_ids.update(team_member_ids)
 
     # Получаем участников в чате
     participants = get_participants_by_group(message.chat.id)
 
     # Формируем список участников для упоминания
-    mentioned_participants = [
-        p for p in participants if p.id in all_team_member_ids
-    ]
+    for p in participants:
+        if p.id in all_teams_member_ids:
+            mentioned_participants.append(p)
 
-    # Убираем из упоминаний автора сообщения
-    mentioned_participants = [p for p in mentioned_participants if p.id != message.from_user.id]
+    # Убираем из упоминаний автора сообщения и бота
+    mentioned_participants = [p for p in mentioned_participants if (p.id != message.from_user.id and p.id != bot.get_me().id)]
 
     if mentioned_participants and teams_or_usernames:
-        bot_id = bot.get_me().id
         author_name = (
             f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
         )
         # Формируем текст сообщения, исключая упоминания команд
         message_text = " ".join(text_parts).strip()
         full_message = create_mentions_text(
-            mentioned_participants, bot_id, message_text, author_name
+            mentioned_participants, message_text, author_name
         )
 
         bot.send_message(
