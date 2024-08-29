@@ -10,7 +10,7 @@ from team_service import (
     handle_team_delete,
     handle_team_mention,
     handle_team_set,
-    handle_teams,
+    handle_teams, handle_invite_team_participants, handle_team_kick,
 )
 
 setup_logging()
@@ -84,12 +84,14 @@ def help(message):
 /all <текст>   -    упомяну всех коллег для данного текста.\n\
 Также доступна запись @all <текст>, если сообщение так начинается
 /update вызываю мою систему для обновления списка коллег для чата
+/teams  -   список всех команд группы
 /team_set <имя команды> <список упоминаний участников> - установить команду. 
 Обратите внимание, что работать будут именно упоминания
 @team1 ... @teamN <текст> -   упомяну коллег из перечисленных команд данным текстом.\n\
 обращаю внимание — только если сообщение с этого начинается и команды разделены пробелом
-/teams  -   список всех команд
 /team_delete <имя команды> - удаляю команду как отдельный список
+/team_invite <имя команды> <упоминание1> .... <упоминаниеN> - добавить участников в команду
+/team_kick <имя команды> <упоминание1> .... <упоминаниеN> - убрать участников из команды
                 """,
     )
 
@@ -116,6 +118,23 @@ def all(message):
     except Exception as e:
         handle_error(e)
 
+@bot.message_handler(commands=["team_invite"])
+def team_set(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_invite_team_participants(message, bot)
+    except Exception as e:
+        handle_error(e)
+
+@bot.message_handler(commands=["team_kick"])
+def team_set(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_team_kick(message, bot)
+    except Exception as e:
+        handle_error(e)
 
 @bot.message_handler(commands=["team_set"])
 def team_set(message):

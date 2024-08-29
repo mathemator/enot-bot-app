@@ -10,7 +10,7 @@ from common.repository import (
     get_existing_team_members,
     get_participants_by_group,
     get_teams_by_group,
-    save_team,
+    save_team, get_participants_by_usernames,
 )
 
 
@@ -79,7 +79,6 @@ def handle_team_mention(message, bot):
             if entity.type == "text_mention":
                 # Упоминание через MarkdownV2 [username](tg://user?id=...)
                 user_id = entity.user.id
-                username = entity.user.username
                 participant = next((p for p in participants if p.id == user_id), None)
                 if participant:
                     mentioned_participants.append(participant)
@@ -198,3 +197,115 @@ def handle_team_delete(message, bot):
         bot.reply_to(message, f"Команда '{team_name}' успешно удалена!")
     except Exception as e:
         bot.reply_to(message, f"Произошла ошибка при удалении команды: {e}")
+
+def handle_invite_team_participants(message, bot):
+    command_parts = message.text.split()
+
+    if len(command_parts) < 2:
+        bot.reply_to(message, "Пожалуйста, укажите имя команды и участников.")
+        return
+
+    team_name = command_parts[1]
+
+    # Проверяем, существует ли команда с таким именем
+    chat_id = message.chat.id
+    teams = get_teams_by_group(chat_id)
+    if team_name not in teams:
+        bot.reply_to(message, f"Команда '{team_name}' не найдена.")
+        return
+
+    # Списки для хранения упомянутых пользователей
+    usernames = []
+    user_ids = []
+
+    # Извлекаем упоминания из entities
+    if message.entities:
+        for entity in message.entities:
+            if entity.type == "mention":
+                username = message.text[entity.offset + 1 : entity.offset + entity.length]
+                usernames.append(username)
+            elif entity.type == "text_mention":
+                user_id = entity.user.id
+                user_ids.append(user_id)
+
+    resolved_ids = [participant.id for participant in get_participants_by_usernames(usernames)]
+    user_ids.extend(resolved_ids)
+
+    # Добавляем упомянутых участников в команду
+    if usernames or user_ids:
+        try:
+            invite_participants_to_team(chat_id, team_name, user_ids)
+            bot.reply_to(message, f"Участники успешно добавлены в команду '{team_name}'.")
+        except Exception as e:
+            bot.reply_to(message, f"Произошла ошибка при добавлении участников: {e}")
+    else:
+        bot.reply_to(message, "Пожалуйста, укажите хотя бы одного участника.")
+
+# Функция для добавления участников в команду
+def invite_participants_to_team(chat_id, team_name, user_ids):
+    # Получаем текущих участников команды
+    current_member_ids = get_existing_team_members(team_name, chat_id)
+    for user_id in user_ids:
+        if user_id not in current_member_ids:
+            current_member_ids.add(user_id)
+
+    # Сохраняем обновленный список участников команды
+    save_team(chat_id, team_name, [], current_member_ids)
+
+def handle_team_kick(message, bot):
+    command_parts = message.text.split()
+
+    if len(command_parts) < 2:
+        bot.reply_to(message, "Пожалуйста, укажите имя команды и участников.")
+        return
+
+    team_name = command_parts[1]
+
+    # Проверяем, существует ли команда с таким именем
+    chat_id = message.chat.id
+    teams = get_teams_by_group(chat_id)
+    if team_name not in teams:
+        bot.reply_to(message, f"Команда '{team_name}' не найдена.")
+        return
+
+    # Списки для хранения упомянутых пользователей
+    usernames = []
+    user_ids = []
+
+    # Извлекаем упоминания из entities
+    if message.entities:
+        for entity in message.entities:
+            if entity.type == "mention":
+                username = message.text[entity.offset + 1 : entity.offset + entity.length]
+                usernames.append(username)
+            elif entity.type == "text_mention":
+                user_id = entity.user.id
+                user_ids.append(user_id)
+
+    resolved_ids = [participant.id for participant in get_participants_by_usernames(usernames)]
+    user_ids.extend(resolved_ids)
+
+    # Удаляем указанных участников из команды
+    if usernames or user_ids:
+        try:
+            remove_participants_from_team(chat_id, team_name, user_ids)
+            bot.reply_to(message, f"Участники успешно удалены из команды '{team_name}'.")
+        except Exception as e:
+            bot.reply_to(message, f"Произошла ошибка при удалении участников: {e}")
+    else:
+        bot.reply_to(message, "Пожалуйста, укажите хотя бы одного участника.")
+
+# Функция для удаления участников из команды
+def remove_participants_from_team(chat_id, team_name, user_ids):
+    # Получаем текущих участников команды
+    current_member_ids = get_existing_team_members(team_name, chat_id)
+
+    # Создаем список для обновленных участников команды
+    updated_member_ids = current_member_ids.copy()
+
+    for user_id in user_ids:
+        if user_id in updated_member_ids:
+            updated_member_ids.remove(user_id)
+
+    # Сохраняем обновленный список участников команды
+    save_team(chat_id, team_name, [], updated_member_ids)

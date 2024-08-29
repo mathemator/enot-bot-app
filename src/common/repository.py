@@ -106,7 +106,7 @@ def get_participants_by_group(group_id):
         )
         return participants  # Возвращаем список объектов Participant
     except Exception as e:
-        print(f"Error retrieving participants: {e}")
+        logging.error(f"Error retrieving participants: {e}")
         return []
     finally:
         db.close()
@@ -120,7 +120,7 @@ def get_participants_by_usernames(usernames):
         )
         return {participant.username: participant.id for participant in participants}
     except Exception as e:
-        print(f"Error retrieving participants by usernames: {e}")
+        logging.error(f"Error retrieving participants by usernames: {e}")
         return {}
     finally:
         db.close()
@@ -137,7 +137,7 @@ def get_existing_team_members(team_name, group_id):
         )
         return {participant.participant_id for participant in participants}
     except Exception as e:
-        print(f"Error retrieving team participants: {e}")
+        logging.error(f"Error retrieving team participants: {e}")
         return set()
     finally:
         db.close()
@@ -147,7 +147,6 @@ def get_teams_by_group(group_id):
     db = SessionLocal()
     try:
         # Извлечение всех уникальных команд для указанной группы
-        print(db.query(TeamParticipant.team_name).all())
         teams = (
             db.query(TeamParticipant.team_name)
             .filter_by(group_id=group_id)
@@ -156,7 +155,7 @@ def get_teams_by_group(group_id):
         )
         return [team.team_name for team in teams]  # Возвращаем список имен команд
     except Exception as e:
-        print(f"Error retrieving teams: {e}")
+        logging.error(f"Error retrieving teams: {e}")
         return []
     finally:
         db.close()
@@ -188,10 +187,10 @@ def save_team(group_id, team_name, usernames, user_ids):
         db.commit()
     except IntegrityError as e:
         db.rollback()
-        print(f"Error saving team: {e}")
+        logging.error(f"Error saving team: {e}")
     except Exception as e:
         db.rollback()
-        print(f"Unexpected error: {e}")
+        logging.error(f"Unexpected error: {e}")
     finally:
         db.close()
 
@@ -207,10 +206,10 @@ def delete_team(chat_id, team_name):
         db.commit()
     except IntegrityError as e:
         db.rollback()
-        print(f"Error removing team: {e}")
+        logging.error(f"Error removing team: {e}")
     except Exception as e:
         db.rollback()
-        print(f"Unexpected error: {e}")
+        logging.error(f"Unexpected error: {e}")
     finally:
         db.close()
 
