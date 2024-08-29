@@ -37,7 +37,7 @@ def handle_all_command(message, bot):
         f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
     )
     message_text = message_text
-    full_message = create_mentions_text(participants, bot_id, message_text, author_name)
+    full_message = create_mentions_text(participants, message_text, author_name)
 
     bot.send_message(
         chat_id=message.chat.id,
