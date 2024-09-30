@@ -97,15 +97,6 @@ def help(message):
                 """,
     )
 
-
-# @bot.message_handler(content_types=['photo'], func=lambda message: "@" in message.caption)
-# def debug(message):
-#     global current_chat_id
-#     current_chat_id = message.chat.id
-#     print(message.entities)
-#
-
-
 @bot.message_handler(
     func=lambda message: (message.text and "@" in message.text)
     or (message.caption and "@" in message.caption),
