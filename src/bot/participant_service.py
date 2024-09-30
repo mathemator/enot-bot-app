@@ -27,25 +27,7 @@ def handle_all_command(message, bot):
         )
         return
 
-    bot_id = bot.get_me().id
-    message_text = (
-        message.text.split(maxsplit=1)[1]
-        if len(message.text.split(maxsplit=1)) > 1
-        else ""
-    )
-    author_name = (
-        f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-    )
-    message_text = message_text
-    full_message = create_mentions_text(participants, message_text, author_name)
+    reply_message = create_mentions_text(participants)
 
-    bot.send_message(
-        chat_id=message.chat.id,
-        text=full_message,
-        parse_mode="MarkdownV2",
-        message_thread_id=(
-            message.message_thread_id if message.is_topic_message else None
-        ),
-    )
-
-    bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+    # Отправляем ответ с упоминаниями
+    bot.reply_to(message, reply_message, parse_mode="MarkdownV2")

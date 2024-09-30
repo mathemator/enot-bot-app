@@ -1,16 +1,18 @@
 # team_service.py
+
 from utils import (
     check_bot_delete_permissions,
     create_mentions_text,
-    send_data_not_found_message
+    send_data_not_found_message,
 )
 
 from common.repository import (
     delete_team,
     get_existing_team_members,
     get_participants_by_group,
+    get_participants_by_usernames,
     get_teams_by_group,
-    save_team, get_participants_by_usernames,
+    save_team,
 )
 
 
@@ -29,7 +31,10 @@ def handle_team_set(message, bot):
     # Проверяем, существует ли участник с таким именем, как имя команды
     for participant in participants:
         if participant.username and participant.username.lower() == team_name.lower():
-            bot.reply_to(message, f"Ошибка: имя '{team_name}' уже занято участником {participant.username}.")
+            bot.reply_to(
+                message,
+                f"Ошибка: имя '{team_name}' уже занято участником {participant.username}.",
+            )
             return
 
     usernames = []
@@ -39,8 +44,8 @@ def handle_team_set(message, bot):
         for entity in message.entities:
             if entity.type == "mention":
                 username = message.text[
-                           entity.offset + 1 : entity.offset + entity.length
-                           ]
+                    entity.offset + 1 : entity.offset + entity.length
+                ]
                 usernames.append(username)
             elif entity.type == "text_mention":
                 user_id = entity.user.id
@@ -57,6 +62,7 @@ def handle_team_set(message, bot):
     except Exception as e:
         bot.reply_to(message, f"Произошла ошибка при сохранении команды: {e}")
 
+
 def handle_team_mention(message, bot):
     group_id = message.chat.id
 
@@ -65,7 +71,9 @@ def handle_team_mention(message, bot):
     text_parts = []
     mentioned_participants = []  # Для хранения всех участников, которые будут упомянуты
 
-    message_text = message.text  # Исходный текст сообщения
+    message_text = (
+        message.text if message.text else message.caption
+    )  # Исходный текст сообщения
 
     # Получаем команды, которые существуют в группе
     group_teams = get_teams_by_group(group_id)
@@ -86,7 +94,7 @@ def handle_team_mention(message, bot):
     # Обрабатываем текст, чтобы выделить команды и текст сообщения
     parts = message_text.split()
     for part in parts:
-        if part.startswith('@'):
+        if part.startswith("@"):
             username_or_team = part[1:]
             # Проверяем, является ли это упоминанием команды
             if username_or_team in group_teams:
@@ -119,29 +127,18 @@ def handle_team_mention(message, bot):
             mentioned_participants.append(p)
 
     # Убираем из упоминаний автора сообщения и бота
-    mentioned_participants = [p for p in mentioned_participants if (p.id != message.from_user.id and p.id != bot.get_me().id)]
+    mentioned_participants = [
+        p
+        for p in mentioned_participants
+        if (p.id != message.from_user.id and p.id != bot.get_me().id)
+    ]
 
     if mentioned_participants and teams_or_usernames:
-        author_name = (
-            f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-        )
-        # Формируем текст сообщения, исключая упоминания команд
-        message_text = " ".join(text_parts).strip()
-        full_message = create_mentions_text(
-            mentioned_participants, message_text, author_name
-        )
+        reply_message = create_mentions_text(mentioned_participants)
 
-        bot.send_message(
-            chat_id=message.chat.id,
-            text=full_message,
-            parse_mode="MarkdownV2",
-            message_thread_id=(
-                message.message_thread_id if message.is_topic_message else None
-            ),
-        )
+        # Отправляем ответ с упоминаниями
+        bot.reply_to(message, reply_message, parse_mode="MarkdownV2")
 
-        if check_bot_delete_permissions(group_id, bot):
-            bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
 
 def handle_teams(message, bot):
     group_id = message.chat.id
@@ -198,6 +195,7 @@ def handle_team_delete(message, bot):
     except Exception as e:
         bot.reply_to(message, f"Произошла ошибка при удалении команды: {e}")
 
+
 def handle_invite_team_participants(message, bot):
     command_parts = message.text.split()
 
@@ -222,24 +220,29 @@ def handle_invite_team_participants(message, bot):
     if message.entities:
         for entity in message.entities:
             if entity.type == "mention":
-                username = message.text[entity.offset + 1 : entity.offset + entity.length]
+                username = message.text[
+                    entity.offset + 1 : entity.offset + entity.length
+                ]
                 usernames.append(username)
             elif entity.type == "text_mention":
                 user_id = entity.user.id
                 user_ids.append(user_id)
 
-    resolved_ids = [participant.id for participant in get_participants_by_usernames(usernames)]
+    resolved_ids = list(get_participants_by_usernames(usernames).values())
     user_ids.extend(resolved_ids)
 
     # Добавляем упомянутых участников в команду
     if usernames or user_ids:
         try:
             invite_participants_to_team(chat_id, team_name, user_ids)
-            bot.reply_to(message, f"Участники успешно добавлены в команду '{team_name}'.")
+            bot.reply_to(
+                message, f"Участники успешно добавлены в команду '{team_name}'."
+            )
         except Exception as e:
             bot.reply_to(message, f"Произошла ошибка при добавлении участников: {e}")
     else:
         bot.reply_to(message, "Пожалуйста, укажите хотя бы одного участника.")
+
 
 # Функция для добавления участников в команду
 def invite_participants_to_team(chat_id, team_name, user_ids):
@@ -251,6 +254,7 @@ def invite_participants_to_team(chat_id, team_name, user_ids):
 
     # Сохраняем обновленный список участников команды
     save_team(chat_id, team_name, [], current_member_ids)
+
 
 def handle_team_kick(message, bot):
     command_parts = message.text.split()
@@ -276,24 +280,31 @@ def handle_team_kick(message, bot):
     if message.entities:
         for entity in message.entities:
             if entity.type == "mention":
-                username = message.text[entity.offset + 1 : entity.offset + entity.length]
+                username = message.text[
+                    entity.offset + 1 : entity.offset + entity.length
+                ]
                 usernames.append(username)
             elif entity.type == "text_mention":
                 user_id = entity.user.id
                 user_ids.append(user_id)
 
-    resolved_ids = [participant.id for participant in get_participants_by_usernames(usernames)]
+    resolved_ids = [
+        participant.id for participant in get_participants_by_usernames(usernames)
+    ]
     user_ids.extend(resolved_ids)
 
     # Удаляем указанных участников из команды
     if usernames or user_ids:
         try:
             remove_participants_from_team(chat_id, team_name, user_ids)
-            bot.reply_to(message, f"Участники успешно удалены из команды '{team_name}'.")
+            bot.reply_to(
+                message, f"Участники успешно удалены из команды '{team_name}'."
+            )
         except Exception as e:
             bot.reply_to(message, f"Произошла ошибка при удалении участников: {e}")
     else:
         bot.reply_to(message, "Пожалуйста, укажите хотя бы одного участника.")
+
 
 # Функция для удаления участников из команды
 def remove_participants_from_team(chat_id, team_name, user_ids):

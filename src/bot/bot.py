@@ -7,10 +7,12 @@ from bot_config import APP_PORT, BOT_TOKEN, DEVELOPER_ID
 from logging_config import setup_logging
 from participant_service import handle_all_command
 from team_service import (
+    handle_invite_team_participants,
     handle_team_delete,
+    handle_team_kick,
     handle_team_mention,
     handle_team_set,
-    handle_teams, handle_invite_team_participants, handle_team_kick,
+    handle_teams,
 )
 
 setup_logging()
@@ -96,12 +98,25 @@ def help(message):
     )
 
 
-@bot.message_handler(func=lambda message: message.text.startswith("@"))
+# @bot.message_handler(content_types=['photo'], func=lambda message: "@" in message.caption)
+# def debug(message):
+#     global current_chat_id
+#     current_chat_id = message.chat.id
+#     print(message.entities)
+#
+
+
+@bot.message_handler(
+    func=lambda message: (message.text and "@" in message.text)
+    or (message.caption and "@" in message.caption),
+    content_types=["photo", "text", "video", "document"],
+)
 def handle_mention(message):
     global current_chat_id
     current_chat_id = message.chat.id
+    message_text = message.text if message.text else message.caption
     try:
-        if message.text.startswith("@all"):
+        if "@all" in message_text:
             handle_all_command(message, bot)
         else:
             handle_team_mention(message, bot)
@@ -118,6 +133,7 @@ def all(message):
     except Exception as e:
         handle_error(e)
 
+
 @bot.message_handler(commands=["team_invite"])
 def team_set(message):
     global current_chat_id
@@ -127,6 +143,7 @@ def team_set(message):
     except Exception as e:
         handle_error(e)
 
+
 @bot.message_handler(commands=["team_kick"])
 def team_set(message):
     global current_chat_id
@@ -135,6 +152,7 @@ def team_set(message):
         handle_team_kick(message, bot)
     except Exception as e:
         handle_error(e)
+
 
 @bot.message_handler(commands=["team_set"])
 def team_set(message):
