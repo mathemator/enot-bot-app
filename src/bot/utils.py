@@ -25,10 +25,11 @@ def create_mentions_text(participants, message_text, author_name):
 
 
 def create_mentions_text(participants):
-    return f"{", ".join(
-        f"Обратите внимание, [{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
+    mentions = ", ".join(
+        f"[{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
         for participant in participants
-    )}"
+    )
+    return f"Обратите внимание, {mentions}"
 
 
 def send_data_not_found_message(message, text, bot):
