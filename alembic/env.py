@@ -1,5 +1,6 @@
-from logging.config import fileConfig
 import os
+from logging.config import fileConfig
+
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
@@ -14,10 +15,10 @@ config = context.config
 fileConfig(config.config_file_name)
 
 # Here, we extract the DATABASE_URL environment variable
-database_url = os.getenv('DATABASE_URL')
-print(f"database_url: {database_url}" )
+database_url = os.getenv("DATABASE_URL")
+print(f"database_url: {database_url}")
 if database_url:
-    config.set_main_option('sqlalchemy.url', database_url)
+    config.set_main_option("sqlalchemy.url", database_url)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -69,9 +70,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

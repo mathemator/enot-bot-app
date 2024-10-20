@@ -13756,3 +13756,262 @@ telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsucc
 2024-09-30 04:10:35,147 - INFO - Starting bot
 2024-09-30 04:33:07,506 - INFO - Starting bot
 2024-09-30 04:48:46,312 - INFO - Starting bot
+2024-09-30 05:07:50,269 - INFO - Starting bot
+2024-09-30 05:07:54,627 - ERROR - Error occurred: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /update_participants/-1002088136062 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000002368FA210A0>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+2024-09-30 05:10:17,825 - INFO - Starting bot
+2024-09-30 05:11:19,425 - INFO - Starting bot
+2024-09-30 05:12:35,126 - INFO - response for -1002088136062: {"message":"Participants saved to database","status":"success"}
+
+2024-10-20 13:45:50,528 - INFO - Starting bot
+2024-10-20 13:47:29,337 - INFO - response for -1002088136062: {"error":"Internal Server Error","message":"The channel specified is private and you lack permission to access it. Another reason may be that you were banned from it (caused by GetChannelsRequest)"}
+
+2024-10-20 13:49:11,262 - ERROR - Error saving scheduled task: __init__() got an unexpected keyword argument 'scheduled_days'
+2024-10-20 13:51:01,934 - INFO - Starting bot
+2024-10-20 13:51:01,937 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:52:01,938 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:53:01,940 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:54:01,941 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:54:44,738 - INFO - Starting bot
+2024-10-20 13:54:44,742 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:55:44,746 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 13:56:44,749 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:01:43,731 - INFO - Starting bot
+2024-10-20 14:01:43,735 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:02:43,738 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:03:43,740 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:04:43,741 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:05:34,373 - INFO - Starting bot
+2024-10-20 14:05:34,376 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:06:34,378 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:07:34,379 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:08:34,380 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:09:34,381 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.is_active
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_time AS scheduled_tasks_end_time, scheduled_tasks.is_active AS scheduled_tasks_is_active 
+FROM scheduled_tasks 
+WHERE scheduled_tasks.is_active = 1]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 14:11:17,297 - INFO - Starting bot
+2024-10-20 14:11:33,509 - ERROR - Error saving scheduled task: (sqlite3.ProgrammingError) Error binding parameter 3: type 'list' is not supported
+[SQL: INSERT INTO scheduled_tasks (message, chat_id, recipients, days, time, end_time) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('privet', -1002088136062, ['@mathemator'], ['Mon'], '14:13', None)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-10-20 14:14:46,569 - INFO - Starting bot
+2024-10-20 14:14:57,240 - ERROR - Error saving scheduled task: (sqlite3.ProgrammingError) Error binding parameter 4: type 'list' is not supported
+[SQL: INSERT INTO scheduled_tasks (message, chat_id, recipients, days, time, end_time) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('privet', -1002088136062, '@mathemator', ['Mon'], '14:16', None)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-10-20 14:16:41,073 - INFO - Starting bot
+2024-10-20 14:16:53,302 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:19:00,743 - INFO - Starting bot
+2024-10-20 14:24:46,323 - INFO - Starting bot
+2024-10-20 14:24:51,855 - INFO - Starting bot
+2024-10-20 14:25:50,708 - INFO - Starting bot
+2024-10-20 14:25:57,084 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 14:26:47,456 - INFO - Starting bot
+2024-10-20 14:27:20,834 - INFO - Starting bot
+2024-10-20 14:27:30,447 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:28:46,418 - INFO - Starting bot
+2024-10-20 14:28:59,188 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 14:31:27,285 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:32:22,645 - INFO - Starting bot
+2024-10-20 14:32:49,839 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 14:33:37,543 - INFO - Starting bot
+2024-10-20 14:33:57,449 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:34:07,029 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 14:34:26,850 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:36:05,326 - INFO - Starting bot
+2024-10-20 14:42:47,300 - INFO - Starting bot
+2024-10-20 14:43:02,384 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 14:43:17,010 - INFO - Scheduled task saved successfully: 1
+2024-10-20 14:44:56,356 - INFO - Starting bot
+2024-10-20 14:45:18,871 - INFO - Starting bot
+2024-10-20 15:19:10,814 - INFO - Starting bot
+2024-10-20 15:19:34,410 - INFO - Starting bot
+2024-10-20 15:22:47,391 - INFO - Starting bot
+2024-10-20 16:00:00,059 - INFO - Starting bot
+2024-10-20 16:00:54,561 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 16:01:59,298 - INFO - Starting bot
+2024-10-20 16:02:43,306 - INFO - Starting bot
+2024-10-20 16:04:30,534 - INFO - Starting bot
+2024-10-20 16:04:33,557 - INFO - Starting bot
+2024-10-20 16:06:18,055 - INFO - Starting bot
+2024-10-20 16:06:41,907 - INFO - Starting bot
+2024-10-20 16:08:32,023 - INFO - Starting bot
+2024-10-20 16:08:47,889 - INFO - Scheduled task saved successfully: 1
+2024-10-20 16:10:09,407 - INFO - Scheduled task saved successfully: 2
+2024-10-20 16:10:15,168 - INFO - Starting bot
+2024-10-20 16:12:46,600 - INFO - Starting bot
+2024-10-20 16:13:54,103 - INFO - Starting bot
+2024-10-20 16:14:20,796 - INFO - Scheduled task saved successfully: 3
+2024-10-20 16:14:27,594 - INFO - Starting bot
+2024-10-20 16:17:49,463 - INFO - Starting bot
+2024-10-20 16:18:05,757 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 16:18:12,260 - INFO - Scheduled task 2 successfully deleted.
+2024-10-20 16:18:16,564 - INFO - Scheduled task 3 successfully deleted.
+2024-10-20 16:18:34,928 - INFO - Scheduled task saved successfully: 1
+2024-10-20 16:19:01,967 - INFO - Starting bot
+2024-10-20 16:19:34,363 - INFO - Starting bot
+2024-10-20 16:19:49,542 - INFO - Starting bot
+2024-10-20 16:20:54,810 - INFO - Starting bot
+2024-10-20 16:21:01,162 - INFO - Scheduled task saved successfully: 2
+2024-10-20 16:21:07,960 - INFO - Starting bot
+2024-10-20 16:21:38,452 - INFO - Starting bot
+2024-10-20 16:23:17,178 - INFO - Starting bot
+2024-10-20 16:23:27,178 - INFO - Scheduled task saved successfully: 3
+2024-10-20 16:23:31,248 - INFO - Starting bot
+2024-10-20 16:25:34,481 - INFO - Starting bot
+2024-10-20 16:29:43,317 - INFO - Starting bot
+2024-10-20 16:41:16,150 - INFO - Starting bot
+2024-10-20 16:41:26,350 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 16:41:28,634 - INFO - Scheduled task 2 successfully deleted.
+2024-10-20 16:41:30,134 - INFO - Scheduled task 3 successfully deleted.
+2024-10-20 16:41:31,333 - WARNING - Scheduled task 1 not found.
+2024-10-20 16:41:42,985 - INFO - Starting bot
+2024-10-20 16:49:03,942 - INFO - Starting bot
+2024-10-20 16:49:13,993 - INFO - Scheduled task saved successfully: 1
+2024-10-20 16:49:17,700 - INFO - Starting bot
+2024-10-20 16:49:37,971 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 16:50:11,624 - INFO - Starting bot
+2024-10-20 16:51:43,162 - INFO - Starting bot
+2024-10-20 16:52:43,227 - INFO - Scheduled task saved successfully: 1
+2024-10-20 16:53:49,343 - INFO - Scheduled task saved successfully: 2
+2024-10-20 16:53:54,960 - INFO - Starting bot
+2024-10-20 17:35:35,155 - INFO - Starting bot
+2024-10-20 17:35:49,996 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 17:35:53,905 - INFO - Scheduled task 2 successfully deleted.
+2024-10-20 17:36:49,569 - INFO - Starting bot
+2024-10-20 17:37:25,980 - INFO - Starting bot
+2024-10-20 17:38:08,410 - INFO - Starting bot
+2024-10-20 17:46:26,953 - INFO - Starting bot
+2024-10-20 17:51:25,178 - INFO - Starting bot
+2024-10-20 17:53:05,535 - INFO - Starting bot
+2024-10-20 17:54:25,147 - INFO - Starting bot
+2024-10-20 17:56:59,425 - INFO - Starting bot
+2024-10-20 17:57:59,153 - INFO - Scheduled task saved successfully: 1
+2024-10-20 17:59:23,723 - INFO - Starting bot
+2024-10-20 18:00:27,962 - INFO - Starting bot
+2024-10-20 18:00:33,605 - INFO - Scheduled task saved successfully: 2
+2024-10-20 18:00:40,417 - INFO - Starting bot
+2024-10-20 18:01:46,992 - INFO - Scheduled task saved successfully: 3
+2024-10-20 18:02:02,513 - INFO - Starting bot
+2024-10-20 18:02:11,238 - INFO - Starting bot
+2024-10-20 18:05:20,953 - INFO - Starting bot
+2024-10-20 18:05:37,994 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 18:05:39,511 - INFO - Scheduled task 2 successfully deleted.
+2024-10-20 18:05:40,687 - INFO - Scheduled task 3 successfully deleted.
+2024-10-20 18:06:17,961 - INFO - Starting bot
+2024-10-20 18:06:51,406 - INFO - Scheduled task saved successfully: 1
+2024-10-20 18:09:01,372 - INFO - Starting bot
+2024-10-20 18:09:30,430 - INFO - Scheduled task saved successfully: 2
+2024-10-20 18:11:27,734 - INFO - Starting bot
+2024-10-20 18:11:37,788 - INFO - Scheduled task saved successfully: 3
+2024-10-20 18:11:44,514 - INFO - Scheduled task saved successfully: 4
+2024-10-20 18:11:56,319 - INFO - Scheduled task saved successfully: 5
+2024-10-20 18:12:11,700 - INFO - Scheduled task saved successfully: 6
+2024-10-20 18:12:21,437 - INFO - Scheduled task saved successfully: 7
+2024-10-20 18:12:26,711 - INFO - Starting bot
+2024-10-20 18:35:22,886 - INFO - Scheduled task 1 successfully deleted.
+2024-10-20 18:35:23,875 - WARNING - Scheduled task 1 not found.
+2024-10-20 18:35:26,070 - INFO - Scheduled task 3 successfully deleted.
+2024-10-20 18:35:28,204 - INFO - Scheduled task 2 successfully deleted.
+2024-10-20 18:35:29,779 - INFO - Scheduled task 4 successfully deleted.
+2024-10-20 18:35:31,100 - INFO - Scheduled task 5 successfully deleted.
+2024-10-20 18:35:32,714 - INFO - Scheduled task 6 successfully deleted.
+2024-10-20 18:35:34,315 - INFO - Scheduled task 7 successfully deleted.
+2024-10-20 18:45:30,237 - INFO - Starting bot
+2024-10-20 18:45:30,240 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:45:36,658 - INFO - Starting bot
+2024-10-20 18:45:36,661 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:46:55,515 - INFO - Starting bot
+2024-10-20 18:46:55,518 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:47:55,521 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:48:00,492 - INFO - Starting bot
+2024-10-20 18:48:00,495 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:49:12,479 - INFO - Starting bot
+2024-10-20 18:49:12,483 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:49:37,997 - INFO - Starting bot
+2024-10-20 18:49:38,000 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.end_date
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time, scheduled_tasks.end_date AS scheduled_tasks_end_date 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 18:52:43,311 - INFO - Starting bot
+2024-10-20 18:53:02,129 - INFO - Scheduled task saved successfully: 1
+2024-10-20 18:53:09,865 - INFO - Starting bot

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, PrimaryKeyConstraint, String
+from sqlalchemy import Column, ForeignKey, Integer, PrimaryKeyConstraint, String, ARRAY, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -80,3 +80,33 @@ class TeamParticipant(Base):
 
     # Связь с участником
     participant = relationship("Participant", back_populates="team_associations")
+
+
+# ================== ШЕДУЛЕРЫ =====================
+from sqlalchemy import Column, String, DateTime, Integer
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class ScheduledTask(Base):
+    __tablename__ = "scheduled_tasks"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    message = Column(String, nullable=False)
+    chat_id = Column(Integer, nullable=False)  # Идентификатор чата
+    recipients = Column(String, nullable=False)  # Список получателей
+    days = Column(String, nullable=False)  # Список дней
+    time = Column(String, nullable=False)  # Время отправки
+
+    def __init__(self, message, chat_id, recipients, days, time, end_date=None):
+        self.message = message
+        self.chat_id = chat_id
+        self.recipients = recipients
+        self.days = days
+        self.time = time
+
+    def get_recipients_list(self):
+        return self.recipients.split(',')  # Преобразуем строку обратно в список
+
+    def get_scheduled_days_list(self):
+        return self.days.split(',')  # Преобразуем строку обратно в список

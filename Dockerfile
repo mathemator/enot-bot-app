@@ -27,4 +27,4 @@ ENV BOT_TOKEN=
 ENV PYTHONUNBUFFERED=1
 
 # Запускаем оба процесса
-CMD ["sh", "-c", "alembic upgrade head && python /app/src/bot/bot.py & python /app/src/app/app.py"]
+CMD ["sh", "-c", "alembic upgrade head && python /app/src/bot/bot_app.py & python /app/src/app/app.py"]

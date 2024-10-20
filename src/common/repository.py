@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
-from common.models import Base, Participant, ParticipantGroup, TeamParticipant
+from common.models import Base, Participant, ParticipantGroup, TeamParticipant, ScheduledTask
 
 # Определение базовой директории проекта
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -28,6 +28,73 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Создание таблиц в базе данных
 Base.metadata.create_all(bind=engine)
 
+# Функция для сохранения задач в базу данных
+def save_scheduled_task(recipients, message, chat_id, days, time):
+    db = SessionLocal()
+    try:
+        # Создаем новый экземпляр ScheduledTask
+        scheduled_task = ScheduledTask(
+            message=message,
+            chat_id=chat_id,
+            recipients=recipients,
+            days=days,
+            time=time
+        )
+        db.add(scheduled_task)  # Добавляем задачу в сессию
+
+        db.commit()  # Фиксируем изменения в базе данных
+        logging.info(f"Scheduled task saved successfully: {scheduled_task.id}")
+
+        return scheduled_task.id  # Возвращаем идентификатор созданной задачи
+    except Exception as e:
+        db.rollback()  # Откатываем изменения в случае ошибки
+        logging.error(f"Error saving scheduled task: {e}")
+        raise e
+    finally:
+        db.close()  # Закрываем сессию независимо от успеха или ошибки
+
+def delete_scheduled_task(task_id):
+    db = SessionLocal()
+    try:
+        task = db.query(ScheduledTask).filter(ScheduledTask.id == task_id).first()
+        if task:
+            db.delete(task)
+            db.commit()
+            logging.info(f"Scheduled task {task_id} successfully deleted.")
+            return True
+        else:
+            logging.warning(f"Scheduled task {task_id} not found.")
+            return False
+    except Exception as e:
+        db.rollback()
+        logging.error(f"Error deleting scheduled task {task_id}: {e}")
+        raise e
+    finally:
+        db.close()
+
+def get_active_schedules():
+    db = SessionLocal()
+    try:
+        # Получаем только активные задачи для указанного чата
+        active_tasks = db.query(ScheduledTask).all()
+        return active_tasks
+    except Exception as e:
+        logging.error(f"Error retrieving active schedules : {e}")
+        return []
+    finally:
+        db.close()
+
+def get_active_schedules_by_chat(chat_id):
+    db = SessionLocal()
+    try:
+        # Получаем только активные задачи для указанного чата
+        active_tasks = db.query(ScheduledTask).filter(ScheduledTask.chat_id == chat_id).all()
+        return active_tasks
+    except Exception as e:
+        logging.error(f"Error retrieving active schedules for chat {chat_id}: {e}")
+        return []
+    finally:
+        db.close()
 
 # Функция для сохранения участников в базу данных
 def save_participants(participants, group_id):
