@@ -1,8 +1,8 @@
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta, timezone
 
-from bot.team_service import get_complete_mentions
-from bot.utils import create_mentions_text
+from team_service import get_complete_mentions
+from utils import create_mentions_text
 from common.repository import save_scheduled_task, delete_scheduled_task, \
     get_active_schedules_by_chat, get_active_schedules, get_participants_by_group
 
