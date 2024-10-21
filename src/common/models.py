@@ -94,13 +94,15 @@ class ScheduledTask(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     message = Column(String, nullable=False)
     chat_id = Column(Integer, nullable=False)  # Идентификатор чата
+    thread_id  = Column(Integer, nullable=True)  # Идентификатор темы подчата опционально
     recipients = Column(String, nullable=False)  # Список получателей
     days = Column(String, nullable=False)  # Список дней
     time = Column(String, nullable=False)  # Время отправки
 
-    def __init__(self, message, chat_id, recipients, days, time, end_date=None):
+    def __init__(self, message, chat_id, thread_id, recipients, days, time):
         self.message = message
         self.chat_id = chat_id
+        self.thread_id = thread_id
         self.recipients = recipients
         self.days = days
         self.time = time

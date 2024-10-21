@@ -32,7 +32,7 @@ def create_mentions_text(init_text, participants):
         f"[{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
         for participant in participants
     )
-    return f"{init_text}, {mentions}"
+    return f"{escape_markdown(init_text or '')}, {mentions}"
 
 
 def send_data_not_found_message(message, text, bot):

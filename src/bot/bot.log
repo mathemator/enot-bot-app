@@ -14015,3 +14015,345 @@ FROM scheduled_tasks]
 2024-10-20 18:52:43,311 - INFO - Starting bot
 2024-10-20 18:53:02,129 - INFO - Scheduled task saved successfully: 1
 2024-10-20 18:53:09,865 - INFO - Starting bot
+2024-10-20 19:24:03,428 - ERROR - Error occurred: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /update_participants/-1002088136062 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023FF6CB0050>: Failed to establish a new connection: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение'))
+2024-10-20 19:38:49,412 - INFO - Starting bot
+2024-10-20 19:38:49,415 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:38:52,869 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 19:38:52,870 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 19:40:49,219 - INFO - Starting bot
+2024-10-20 19:40:49,222 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:41:17,497 - INFO - Starting bot
+2024-10-20 19:41:17,501 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:41:48,160 - INFO - Starting bot
+2024-10-20 19:41:48,163 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:42:48,164 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:43:15,627 - INFO - Starting bot
+2024-10-20 19:43:15,630 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:45:02,844 - INFO - Starting bot
+2024-10-20 19:45:02,847 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:46:02,849 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:47:13,337 - INFO - Starting bot
+2024-10-20 19:47:40,174 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:48:42,496 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:48:56,328 - INFO - Starting bot
+2024-10-20 19:53:51,760 - INFO - Starting bot
+2024-10-20 19:53:51,763 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 19:57:10,649 - INFO - Starting bot
+2024-10-20 19:57:10,651 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:03:35,616 - INFO - Starting bot
+2024-10-20 20:05:08,335 - INFO - Starting bot
+2024-10-20 20:05:08,339 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:06:08,341 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:07:08,343 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:08:08,344 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:09:33,154 - INFO - Starting bot
+2024-10-20 20:09:33,157 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:10:03,998 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:10:03,999 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:10:07,377 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:10:07,378 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:10:10,784 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:10:10,785 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:10:14,195 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:10:14,196 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:17:44,901 - INFO - Starting bot
+2024-10-20 20:17:44,905 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:21:05,187 - INFO - Starting bot
+2024-10-20 20:21:05,190 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:21:05,946 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:21:05,947 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:21:42,078 - INFO - Starting bot
+2024-10-20 20:21:42,081 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:21:45,432 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:21:45,432 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:21:48,838 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:21:48,839 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:21:52,286 - ERROR - Threaded polling exception: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2024-10-20 20:21:52,287 - ERROR - Exception traceback:
+Traceback (most recent call last):
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 1215, in __threaded_polling
+    polling_thread.raise_exceptions()
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 111, in raise_exceptions
+    raise self.exception_info
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\util.py", line 93, in run
+    task(*args, **kwargs)
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 677, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1),
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\__init__.py", line 649, in get_updates
+    json_updates = apihelper.get_updates(
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 330, in get_updates
+    return _make_request(token, method_url, params=payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 168, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\enot-bot-python\venv\Lib\site-packages\telebot\apihelper.py", line 195, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 409. Description: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+
+2024-10-20 20:22:25,852 - INFO - Starting bot
+2024-10-20 20:22:25,855 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:22:46,542 - INFO - Starting bot
+2024-10-20 20:22:46,545 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:23:01,173 - INFO - Starting bot
+2024-10-20 20:23:16,128 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-10-20 20:23:43,329 - INFO - Starting bot
+2024-10-20 20:23:43,332 - ERROR - Error retrieving active schedules : (sqlite3.OperationalError) no such column: scheduled_tasks.thread_id
+[SQL: SELECT scheduled_tasks.id AS scheduled_tasks_id, scheduled_tasks.message AS scheduled_tasks_message, scheduled_tasks.chat_id AS scheduled_tasks_chat_id, scheduled_tasks.thread_id AS scheduled_tasks_thread_id, scheduled_tasks.recipients AS scheduled_tasks_recipients, scheduled_tasks.days AS scheduled_tasks_days, scheduled_tasks.time AS scheduled_tasks_time 
+FROM scheduled_tasks]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)

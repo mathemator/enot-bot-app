@@ -1,23 +1,23 @@
 import re
-from datetime import timedelta, timezone
-
-from team_service import get_complete_mentions
-from utils import create_mentions_text
-from common.repository import save_scheduled_task, delete_scheduled_task, \
-    get_active_schedules_by_chat, get_active_schedules, get_participants_by_group
-
-import threading
 import time
 from datetime import datetime
+from datetime import timedelta, timezone
+
+from common.repository import save_scheduled_task, delete_scheduled_task, \
+    get_active_schedules_by_chat, get_active_schedules, get_participants_by_group
+from team_service import get_complete_mentions
+from utils import create_mentions_text
 
 moscow_offset = timedelta(hours=3)
 # Создаём объект timezone с нужным смещением
 moscow_tz = timezone(moscow_offset)
 
+
 def schedule_checker(bot):
     while True:
         check_and_send_tasks(bot)
         time.sleep(60)  # Ждем 1 минуту перед следующей проверкой
+
 
 def check_and_send_tasks(bot):
     # Получаем активные задачи
@@ -33,15 +33,18 @@ def check_and_send_tasks(bot):
             # Отправляем сообщение в чат
             mentioned_participants = []
             participants = get_participants_by_group(task.chat_id)
-                    # Формируем список участников для упоминания
+            # Формируем список участников для упоминания
             for p in participants:
                 if str(p.id) in task.recipients.split(','):
                     mentioned_participants.append(p)
 
             bot.send_message(chat_id=task.chat_id,
                              text=create_mentions_text(task.message, mentioned_participants),
-                             parse_mode="MarkdownV2")
+                             parse_mode="MarkdownV2",
+                             message_thread_id=task.thread_id
+                             )
             # Можно дополнительно обработать повторяемость или активность задачи
+
 
 def validate_schedule_command(args):
     errors = []
@@ -107,7 +110,7 @@ def validate_schedule_command(args):
 
 def create_schedule(args, message):
     # Парсим аргументы (дни, время, получатели, сообщение)
-    recipients, days, time, text_message, end_date = None, None, None, None, None
+    recipients, days, time, text_message = None, None, None, None
     message.text = re.sub(r'(@\w+),', r'\1 ', message.text)
     mentioned_participants, teams, mentioned_dogs = get_complete_mentions(message)
     recipients = ",".join([str(participant.id) for participant in mentioned_participants])
@@ -124,34 +127,35 @@ def create_schedule(args, message):
         elif args[i].startswith("-m"):
             text_message = " ".join(args[i + 1:])  # Сообщение
 
-    save_scheduled_task(recipients, text_message, message.chat.id, days, time)
+    save_scheduled_task(recipients,
+                        text_message,
+                        message.chat.id,
+                        message.message_thread_id if message.is_topic_message else None,
+                        days,
+                        time)
 
-    # Логика для сохранения расписания в БД
-    # db.save_schedule(chat_id, recipients, days, time, message, end_date)
 
 def cancel_schedule_service(schedule_id):
     return delete_scheduled_task(schedule_id)
 
+
 def get_active_schedules_service():
     return get_active_schedules()
 
+
 def get_all_schedules_service(chat_id):
-    try:
-        schedules = get_active_schedules_by_chat(chat_id)  # Получаем задачи из репозитория
+    schedules = get_active_schedules_by_chat(chat_id)  # Получаем задачи из репозитория
 
-        # Преобразуем задачи в удобный формат для отображения
-        schedule_list = []
-        for schedule in schedules:
-            schedule_info = (
-                f"Айди: {schedule.id}, "
-                f"Сообщение: {schedule.message}, "
-                f"Получатели: {schedule.recipients}, "
-                f"Дни: {schedule.days}, "
-                f"Время: {schedule.time}, "
-                f"Дата окончания: {schedule.end_date}"
-            ) + "\n"
-            schedule_list.append(schedule_info)
+    # Преобразуем задачи в удобный формат для отображения
+    schedule_list = []
+    for schedule in schedules:
+        schedule_info = (
+                            f"Айди: {schedule.id}, "
+                            f"Сообщение: {schedule.message}, "
+                            f"Получатели: {schedule.recipients}, "
+                            f"Дни: {schedule.days}, "
+                            f"Время: {schedule.time} "
+                        ) + "\n"
+        schedule_list.append(schedule_info)
 
-        return schedule_list
-    except Exception as e:
-        return "Ошибка получения задач :("
+    return schedule_list

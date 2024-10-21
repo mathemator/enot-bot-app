@@ -29,13 +29,14 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 
 # Функция для сохранения задач в базу данных
-def save_scheduled_task(recipients, message, chat_id, days, time):
+def save_scheduled_task(recipients, message, chat_id, thread_id, days, time):
     db = SessionLocal()
     try:
         # Создаем новый экземпляр ScheduledTask
         scheduled_task = ScheduledTask(
             message=message,
             chat_id=chat_id,
+            thread_id=thread_id,
             recipients=recipients,
             days=days,
             time=time
