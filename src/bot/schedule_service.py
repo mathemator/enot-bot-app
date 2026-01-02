@@ -7,6 +7,7 @@ from common.repository import save_scheduled_task, delete_scheduled_task, \
     get_active_schedules_by_chat, get_active_schedules, get_participants_by_group
 from team_service import get_complete_mentions
 from utils import create_mentions_text
+from calendar_service import is_workday
 
 moscow_offset = timedelta(hours=3)
 # Создаём объект timezone с нужным смещением
@@ -20,6 +21,11 @@ def schedule_checker(bot):
 
 
 def check_and_send_tasks(bot):
+    today = datetime.date.today()
+
+    if not is_workday(today):
+        return
+
     # Получаем активные задачи
     active_tasks = get_active_schedules_service()
     # todo проработать момент с таймзонами
