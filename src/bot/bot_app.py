@@ -8,6 +8,7 @@ import telebot
 from bot_config import APP_PORT, BOT_TOKEN, DEVELOPER_ID
 from logging_config import setup_logging
 from participant_service import handle_all_command
+from participant_service import handle_vacation
 from schedule_service import (
     get_all_schedules_service,
     create_schedule, schedule_checker,
@@ -105,6 +106,7 @@ def help(message):
 /schedule -u @userN,@teamM,<mentionK> -d <Day1,DayN> -t 14:00 -m "Сообщение" -e дд-мм-ггг - где -u это список юзеров, команд, и упоминаний, -d дни недели на англ. типа Mon,Tue,Sun, -m сообщение, -e опциональное дата завершения
 /schedules выводит список запланированных сообщений
 /schedule_cancel <id> удаляет запланированное задание
+/vacation - переключение твоего глобального состояния отпуска
                 """,
     )
 
@@ -260,6 +262,17 @@ def handle_schedules(message):
             bot.send_message(chat_id=message.chat.id, text="Нет активных задач.")
     except Exception as e:
         bot.send_message(chat_id=message.chat.id, text=f"Ошибка получения задач: {e}")
+
+
+# ================== ОТПУСК ===================
+@bot.message_handler(commands=["vacation"])
+def vacation_command(message):
+    global current_chat_id
+    current_chat_id = message.chat.id
+    try:
+        handle_vacation(message, bot)
+    except Exception as e:
+        handle_error(e)
 
 
 # ================== MAIN ===================

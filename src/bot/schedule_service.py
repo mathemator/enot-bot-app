@@ -39,7 +39,8 @@ def check_and_send_tasks(bot):
                     mentioned_participants.append(p)
 
             bot.send_message(chat_id=task.chat_id,
-                             text=create_mentions_text(task.message, mentioned_participants),
+                             text=create_mentions_text(participants=mentioned_participants,
+                                                       init_text=task.message),
                              parse_mode="MarkdownV2",
                              message_thread_id=task.thread_id
                              )

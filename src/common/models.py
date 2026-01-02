@@ -12,17 +12,19 @@ class Participant(Base):
     username = Column(String, nullable=True)
     first_name = Column(String, nullable=True)
     last_name = Column(String, nullable=True)
+    vacation = Column(Boolean, nullable=False, default=False)
 
     # Связь с группами через таблицу ParticipantGroup
     group_associations = relationship("ParticipantGroup", back_populates="participant")
     # Связь с TeamParticipant
     team_associations = relationship("TeamParticipant", back_populates="participant")
 
-    def __init__(self, id, username=None, first_name=None, last_name=None):
+    def __init__(self, id, username=None, first_name=None, last_name=None, vacation=False):
         self.id = id
         self.username = username
         self.first_name = first_name
         self.last_name = last_name
+        self.vacation = vacation
 
     def to_dict(self):
         return {
@@ -30,6 +32,7 @@ class Participant(Base):
             "username": self.username,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "vacation": self.vacation,
         }
 
     @classmethod
@@ -39,6 +42,7 @@ class Participant(Base):
             username=data.get("username"),
             first_name=data.get("first_name"),
             last_name=data.get("last_name"),
+            vacation=data.get("vacation", False),
         )
 
 

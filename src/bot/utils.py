@@ -17,20 +17,32 @@ def send_permission_error_message(group_id, bot):
 
 
 def create_mentions_text(participants, message_text, author_name):
+    active_participants = [
+        p for p in participants if not getattr(p, "vacation", False)
+    ]
+
     mentions = ", ".join(
-        f"[{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
-        for participant in participants
+        f"[{escape_markdown(p.first_name or '')} {escape_markdown(p.last_name or '')}](tg://user?id={p.id})"
+        for p in active_participants
     )
-    return f"{escape_markdown(author_name)} написал:\n{escape_markdown(message_text or '')}\n{mentions}"
 
+    return (
+        f"{escape_markdown(author_name)} написал:\n"
+        f"{escape_markdown(message_text or '')}\n"
+        f"{mentions}"
+    )
 
-def create_mentions_text(participants):
-    return create_mentions_text("Обратите внимание", participants)
+# def create_mentions_text(participants):
+#     return create_mentions_text("Обратите внимание", participants)
 
-def create_mentions_text(init_text, participants):
+def create_mentions_text(participants, init_text="Обратите внимание"):
+    active_participants = [
+        p for p in participants if not getattr(p, "vacation", False)
+    ]
+
     mentions = ", ".join(
-        f"[{escape_markdown(participant.first_name or '')} {escape_markdown(participant.last_name or '')}](tg://user?id={participant.id})"
-        for participant in participants
+        f"[{escape_markdown(p.first_name or '')} {escape_markdown(p.last_name or '')}](tg://user?id={p.id})"
+        for p in active_participants
     )
     return f"{escape_markdown(init_text or '')}, {mentions}"
 

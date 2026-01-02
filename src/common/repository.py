@@ -4,6 +4,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
+from typing import Optional
 
 from common.models import Base, Participant, ParticipantGroup, TeamParticipant, ScheduledTask
 
@@ -281,6 +282,33 @@ def delete_team(chat_id, team_name):
     finally:
         db.close()
 
+def toggle_vacation(participant_id: int) -> Optional[bool]:
+    db = SessionLocal()
+    try:
+        participant = (
+            db.query(Participant)
+            .filter(Participant.id == participant_id)
+            .one_or_none()
+        )
+
+        if not participant:
+            logging.warning(f"Participant {participant_id} not found, vacation toggle skipped")
+            return None
+
+        participant.vacation = not participant.vacation
+        db.commit()
+        return participant.vacation
+
+    except IntegrityError as e:
+        db.rollback()
+        logging.error(f"Error toggling vacation for participant {participant_id}: {e}")
+        raise
+    except Exception as e:
+        db.rollback()
+        logging.error(f"Unexpected error toggling vacation for participant {participant_id}: {e}")
+        raise
+    finally:
+        db.close()
 
 # прозапас
 def delete_participant_if_unlinked(db, participant_id):

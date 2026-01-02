@@ -1,7 +1,6 @@
 # team_service.py
 
 from utils import (
-    check_bot_delete_permissions,
     create_mentions_text,
     send_data_not_found_message,
 )
@@ -74,7 +73,7 @@ def handle_team_mention(message, bot):
     ]
 
     if mentioned_participants and teams:
-        reply_message = create_mentions_text(mentioned_participants)
+        reply_message = create_mentions_text(participants=mentioned_participants)
 
         # Отправляем ответ с упоминаниями
         bot.reply_to(message, reply_message, parse_mode="MarkdownV2")
@@ -287,9 +286,7 @@ def handle_team_kick(message, bot):
                 user_id = entity.user.id
                 user_ids.append(user_id)
 
-    resolved_ids = [
-        participant.id for participant in get_participants_by_usernames(usernames)
-    ]
+    resolved_ids = list(get_participants_by_usernames(usernames).values())
     user_ids.extend(resolved_ids)
 
     # Удаляем указанных участников из команды

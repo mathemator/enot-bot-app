@@ -1,21 +1,36 @@
 # participant_service.py
 from telebot.formatting import escape_markdown
 from utils import (
-    check_bot_delete_permissions,
     create_mentions_text,
     send_data_not_found_message,
-    send_permission_error_message,
 )
 
 from common.repository import get_participants_by_group
+from common.repository import toggle_vacation
 
+def handle_vacation(message, bot):
+    participant_id = message.from_user.id
+
+    new_value = toggle_vacation(participant_id)
+
+    if new_value is None:
+        bot.reply_to(
+            message,
+            "Ой, похоже, тебя нет в базе участников 😿",
+            parse_mode="MarkdownV2"
+        )
+        return
+
+    status_text = "в отпуске 🏖️" if new_value else "снова на связи 💪"
+
+    bot.reply_to(
+        message,
+        escape_markdown(f"Готово! Теперь ты {status_text}"),
+        parse_mode="MarkdownV2",
+    )
 
 def handle_all_command(message, bot):
     group_id = message.chat.id
-
-    if not check_bot_delete_permissions(group_id, bot):
-        send_permission_error_message(group_id, bot)
-        return
 
     participants = get_participants_by_group(group_id)
 
@@ -27,7 +42,7 @@ def handle_all_command(message, bot):
         )
         return
 
-    reply_message = create_mentions_text(participants)
+    reply_message = create_mentions_text(participants=participants)
 
     # Отправляем ответ с упоминаниями
     bot.reply_to(message, reply_message, parse_mode="MarkdownV2")
