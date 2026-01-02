@@ -20,11 +20,12 @@ RUN pip install --no-cache-dir .
 
 ENV DATABASE_PATH=/app/data/database.db
 ENV DATABASE_URL=sqlite:///${DATABASE_PATH}
-ENV API_ID=
-ENV API_HASH=
-ENV BOT_TOKEN=
+ENV API_ID=23251633
+ENV API_HASH=a4feaab630f57fea704d48075ffe685f
+ENV BOT_TOKEN=7482518493:AAGOw-959ow3GSwVJiSTRMdL4RZ2eONaUEU
+
 # Устанавливаем переменную окружения для корректного вывода в консоли
 ENV PYTHONUNBUFFERED=1
 
 # Запускаем оба процесса
-CMD ["sh", "-c", "alembic upgrade head && python /app/src/bot/bot.py & python /app/src/app/app.py"]
+CMD ["sh", "-c", "alembic upgrade head && python /app/src/bot/bot_app.py & python /app/src/app/app.py"]

@@ -1,21 +1,36 @@
 # participant_service.py
 from telebot.formatting import escape_markdown
 from utils import (
-    check_bot_permissions,
     create_mentions_text,
     send_data_not_found_message,
-    send_permission_error_message,
 )
 
 from common.repository import get_participants_by_group
+from common.repository import toggle_vacation
 
+def handle_vacation(message, bot):
+    participant_id = message.from_user.id
+
+    new_value = toggle_vacation(participant_id)
+
+    if new_value is None:
+        bot.reply_to(
+            message,
+            "Ой, похоже, тебя нет в базе участников 😿",
+            parse_mode="MarkdownV2"
+        )
+        return
+
+    status_text = "в отпуске 🏖️" if new_value else "снова на связи 💪"
+
+    bot.reply_to(
+        message,
+        escape_markdown(f"Готово! Теперь ты {status_text}"),
+        parse_mode="MarkdownV2",
+    )
 
 def handle_all_command(message, bot):
     group_id = message.chat.id
-
-    if not check_bot_permissions(group_id, bot):
-        send_permission_error_message(group_id, bot)
-        return
 
     participants = get_participants_by_group(group_id)
 
@@ -27,25 +42,7 @@ def handle_all_command(message, bot):
         )
         return
 
-    bot_id = bot.get_me().id
-    message_text = (
-        message.text.split(maxsplit=1)[1]
-        if len(message.text.split(maxsplit=1)) > 1
-        else ""
-    )
-    author_name = (
-        f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-    )
-    message_text = message_text
-    full_message = create_mentions_text(participants, bot_id, message_text, author_name)
+    reply_message = create_mentions_text(participants=participants)
 
-    bot.send_message(
-        chat_id=message.chat.id,
-        text=full_message,
-        parse_mode="MarkdownV2",
-        message_thread_id=(
-            message.message_thread_id if message.is_topic_message else None
-        ),
-    )
-
-    bot.delete_message(chat_id=message.chat.id, message_id=message.message_id)
+    # Отправляем ответ с упоминаниями
+    bot.reply_to(message, reply_message, parse_mode="MarkdownV2")

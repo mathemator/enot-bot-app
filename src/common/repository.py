@@ -4,8 +4,9 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
+from typing import Optional
 
-from common.models import Base, Participant, ParticipantGroup, TeamParticipant
+from common.models import Base, Participant, ParticipantGroup, TeamParticipant, ScheduledTask
 
 # Определение базовой директории проекта
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -28,6 +29,74 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Создание таблиц в базе данных
 Base.metadata.create_all(bind=engine)
 
+# Функция для сохранения задач в базу данных
+def save_scheduled_task(recipients, message, chat_id, thread_id, days, time):
+    db = SessionLocal()
+    try:
+        # Создаем новый экземпляр ScheduledTask
+        scheduled_task = ScheduledTask(
+            message=message,
+            chat_id=chat_id,
+            thread_id=thread_id,
+            recipients=recipients,
+            days=days,
+            time=time
+        )
+        db.add(scheduled_task)  # Добавляем задачу в сессию
+
+        db.commit()  # Фиксируем изменения в базе данных
+        logging.info(f"Scheduled task saved successfully: {scheduled_task.id}")
+
+        return scheduled_task.id  # Возвращаем идентификатор созданной задачи
+    except Exception as e:
+        db.rollback()  # Откатываем изменения в случае ошибки
+        logging.error(f"Error saving scheduled task: {e}")
+        raise e
+    finally:
+        db.close()  # Закрываем сессию независимо от успеха или ошибки
+
+def delete_scheduled_task(task_id):
+    db = SessionLocal()
+    try:
+        task = db.query(ScheduledTask).filter(ScheduledTask.id == task_id).first()
+        if task:
+            db.delete(task)
+            db.commit()
+            logging.info(f"Scheduled task {task_id} successfully deleted.")
+            return True
+        else:
+            logging.warning(f"Scheduled task {task_id} not found.")
+            return False
+    except Exception as e:
+        db.rollback()
+        logging.error(f"Error deleting scheduled task {task_id}: {e}")
+        raise e
+    finally:
+        db.close()
+
+def get_active_schedules():
+    db = SessionLocal()
+    try:
+        # Получаем только активные задачи для указанного чата
+        active_tasks = db.query(ScheduledTask).all()
+        return active_tasks
+    except Exception as e:
+        logging.error(f"Error retrieving active schedules : {e}")
+        return []
+    finally:
+        db.close()
+
+def get_active_schedules_by_chat(chat_id):
+    db = SessionLocal()
+    try:
+        # Получаем только активные задачи для указанного чата
+        active_tasks = db.query(ScheduledTask).filter(ScheduledTask.chat_id == chat_id).all()
+        return active_tasks
+    except Exception as e:
+        logging.error(f"Error retrieving active schedules for chat {chat_id}: {e}")
+        return []
+    finally:
+        db.close()
 
 # Функция для сохранения участников в базу данных
 def save_participants(participants, group_id):
@@ -106,7 +175,7 @@ def get_participants_by_group(group_id):
         )
         return participants  # Возвращаем список объектов Participant
     except Exception as e:
-        print(f"Error retrieving participants: {e}")
+        logging.error(f"Error retrieving participants: {e}")
         return []
     finally:
         db.close()
@@ -120,7 +189,7 @@ def get_participants_by_usernames(usernames):
         )
         return {participant.username: participant.id for participant in participants}
     except Exception as e:
-        print(f"Error retrieving participants by usernames: {e}")
+        logging.error(f"Error retrieving participants by usernames: {e}")
         return {}
     finally:
         db.close()
@@ -137,7 +206,7 @@ def get_existing_team_members(team_name, group_id):
         )
         return {participant.participant_id for participant in participants}
     except Exception as e:
-        print(f"Error retrieving team participants: {e}")
+        logging.error(f"Error retrieving team participants: {e}")
         return set()
     finally:
         db.close()
@@ -155,7 +224,7 @@ def get_teams_by_group(group_id):
         )
         return [team.team_name for team in teams]  # Возвращаем список имен команд
     except Exception as e:
-        print(f"Error retrieving teams: {e}")
+        logging.error(f"Error retrieving teams: {e}")
         return []
     finally:
         db.close()
@@ -187,10 +256,10 @@ def save_team(group_id, team_name, usernames, user_ids):
         db.commit()
     except IntegrityError as e:
         db.rollback()
-        print(f"Error saving team: {e}")
+        logging.error(f"Error saving team: {e}")
     except Exception as e:
         db.rollback()
-        print(f"Unexpected error: {e}")
+        logging.error(f"Unexpected error: {e}")
     finally:
         db.close()
 
@@ -206,13 +275,40 @@ def delete_team(chat_id, team_name):
         db.commit()
     except IntegrityError as e:
         db.rollback()
-        print(f"Error removing team: {e}")
+        logging.error(f"Error removing team: {e}")
     except Exception as e:
         db.rollback()
-        print(f"Unexpected error: {e}")
+        logging.error(f"Unexpected error: {e}")
     finally:
         db.close()
 
+def toggle_vacation(participant_id: int) -> Optional[bool]:
+    db = SessionLocal()
+    try:
+        participant = (
+            db.query(Participant)
+            .filter(Participant.id == participant_id)
+            .one_or_none()
+        )
+
+        if not participant:
+            logging.warning(f"Participant {participant_id} not found, vacation toggle skipped")
+            return None
+
+        participant.vacation = not participant.vacation
+        db.commit()
+        return participant.vacation
+
+    except IntegrityError as e:
+        db.rollback()
+        logging.error(f"Error toggling vacation for participant {participant_id}: {e}")
+        raise
+    except Exception as e:
+        db.rollback()
+        logging.error(f"Unexpected error toggling vacation for participant {participant_id}: {e}")
+        raise
+    finally:
+        db.close()
 
 # прозапас
 def delete_participant_if_unlinked(db, participant_id):

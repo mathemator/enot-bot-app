@@ -2,6 +2,7 @@ import os
 
 from common.config import load_config
 
+DEVELOPER_ID = 237117705
 required_params = ["BOT_TOKEN"]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
